@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmjip64jum4hx"]
+
+[ext_resource type="PackedScene" uid="uid://bdhr0jkcfalc3" path="res://Scenes/level.tscn" id="1_tuhxb"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+offset_right = 666.0
+offset_bottom = 717.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Level" parent="SubViewport" instance=ExtResource("1_tuhxb")]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ci1buhwjb03xx"]
+
+[node name="LineEdit" type="LineEdit"]
+offset_right = 152.0
+offset_bottom = 24.0
+placeholder_text = "Enter Name"
+max_length = 8
+expand_to_text_length = true

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuwsmr0i6qukn"]
+
+[ext_resource type="Script" path="res://Scripts/UI/menu_button.gd" id="1_7e3oq"]
+
+[node name="Button" type="ColorRect"]
+custom_minimum_size = Vector2(500, 100)
+offset_right = 500.0
+offset_bottom = 100.0
+scale = Vector2(2, 2)
+color = Color(0.533037, 0.533037, 0.533037, 1)
+script = ExtResource("1_7e3oq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 50.0
+scale = Vector2(2, 2)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

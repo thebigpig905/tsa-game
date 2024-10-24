@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://vl43sgi8am5u"]
+
+[ext_resource type="Script" path="res://Scripts/UI/menu.gd" id="1_v5nx7"]
+
+[node name="Menu" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_v5nx7")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="C" type="CenterContainer" parent="ButtonHolder"]
+layout_mode = 2
+
+[node name="HButtonHolder" type="HBoxContainer" parent="ButtonHolder/C"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+color = Color(1, 1, 1, 0)

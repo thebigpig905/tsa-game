@@ -1,0 +1,22 @@
+extends CharacterBody2D
+
+var type:String
+const FISHES = ["blueFish" , "greenFish" , "orangeFish" , "purpleFish" , "redFish" , "yellowFish"]
+var powers = []
+var dir:Vector2 = Vector2(0 , 0)
+var speed = 50
+
+func _ready() -> void:
+	if type == "fish":
+		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , 5)]]
+		if randi_range(1 , 2) == 1:
+			dir = Vector2(1 , 0)
+		else:
+			dir = Vector2(-1 , 0)
+	if type == "power":
+		$Sprite2D.texture = Global.HOOK
+func _physics_process(delta: float) -> void:
+	velocity = speed * dir
+	move_and_slide()
+	if get_slide_collision_count() > 0:
+		dir *= -1

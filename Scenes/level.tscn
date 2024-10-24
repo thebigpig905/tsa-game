@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdhr0jkcfalc3"]
+
+[ext_resource type="Script" path="res://Scripts/Game/level.gd" id="1_ngj87"]
+[ext_resource type="PackedScene" uid="uid://vl27g7nuolo1" path="res://Scenes/player.tscn" id="2_6ku75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjv0f"]
+size = Vector2(8.5, 9)
+
+[node name="Level" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ngj87")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 2.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Background" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+offset_right = 900.0
+offset_bottom = 900.0
+color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_6ku75")]
+position = Vector2(351, 46)
+
+[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/Player"]
+wait_time = 0.183
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+limit_top = 0
+
+[node name="Left" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Left"]
+shape = SubResource("RectangleShape2D_cjv0f")
+
+[node name="Right" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Right"]
+shape = SubResource("RectangleShape2D_cjv0f")
+
+[node name="Top" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Top"]
+shape = SubResource("RectangleShape2D_cjv0f")
+
+[node name="Bottom" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Bottom"]
+shape = SubResource("RectangleShape2D_cjv0f")

@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo5r0a0464ax6"]
+
+[ext_resource type="Script" path="res://Scripts/UI/settings.gd" id="1_ilq60"]
+
+[node name="Settings" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ilq60")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="text" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Power Ups"
+
+[node name="Label2" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Teams"
+
+[node name="Label3" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Level Length"
+
+[node name="Label4" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "# of Rounds"
+
+[node name="Label5" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Max Lives"
+
+[node name="Label6" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Time (sec)"
+
+[node name="Label7" type="Label" parent="HBoxContainer/text"]
+layout_mode = 2
+text = "Max Weight"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Powers" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Teams" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Level Length" type="OptionButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "Small"
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Long"
+popup/item_2/id = 2
+popup/item_3/text = "Extra Long"
+popup/item_3/id = 3
+
+[node name="Rounds" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "1"
+placeholder_text = "rounds"
+expand_to_text_length = true
+
+[node name="Max Lives" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "5"
+placeholder_text = "max lives"
+expand_to_text_length = true
+
+[node name="Time" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "180"
+placeholder_text = "game time (seconds)"
+expand_to_text_length = true
+
+[node name="Weight" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "5"
+placeholder_text = "fish"
+expand_to_text_length = true
+
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/Powers" to="." method="_on_powers_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/Teams" to="." method="_on_teams_toggled"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/Level Length" to="." method="_on_level_length_item_selected"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/Rounds" to="." method="_on_rounds_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/Max Lives" to="." method="_on_max_lives_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/Time" to="." method="_on_time_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/Weight" to="." method="_on_weight_text_submitted"]
