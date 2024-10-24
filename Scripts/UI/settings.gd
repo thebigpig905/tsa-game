@@ -57,5 +57,5 @@ func _on_time_text_changed(new_text: String) -> void:
 	Global.settings["timer"] = clamp(int(new_text) , 1 , INF)
 
 
-func _on_weight_text_submitted(new_text: String) -> void:
+func _on_weight_text_changed(new_text: String) -> void:
 	Global.settings["weight"] = clamp(int(new_text) , 1 , INF)

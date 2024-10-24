@@ -94,4 +94,4 @@ expand_to_text_length = true
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/Rounds" to="." method="_on_rounds_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/Max Lives" to="." method="_on_max_lives_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/Time" to="." method="_on_time_text_changed"]
-[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/Weight" to="." method="_on_weight_text_submitted"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/Weight" to="." method="_on_weight_text_changed"]
