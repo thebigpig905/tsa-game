@@ -2,7 +2,6 @@ extends Control
 var loaded: int
 var lvlsize: Vector2
 var playing = false
-var prev:Vector2 = Vector2(1 , 1)
 @onready var player = $SubViewportContainer/SubViewport/Player
 @onready var ptimer = $SubViewportContainer/SubViewport/Player/Timer
 @onready var background = $SubViewportContainer/SubViewport/Background
@@ -11,6 +10,7 @@ var prev:Vector2 = Vector2(1 , 1)
 @onready var right: StaticBody2D = $SubViewportContainer/SubViewport/Right
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
+var prev:Vector2 = Vector2(1 , 1)
 
 var len = 1000
 var maxY:int
@@ -56,15 +56,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	cam.position.y = player.position.y
 	if player.position.x >= lvlsize.x - (player.size.x / 2):
-		player.dir = Vector2(-1 , player.dir.y)
-		prev = player.dir
+		player.dir.x = -1
 	if player.position.x <= player.size.x / 2:
-		player.dir = Vector2(1 , player.dir.y)
-		prev = player.dir
+		player.dir.x = 1
 	if player.position.y >= maxY - (player.size.y / 2):
-		player.dir = Vector2(prev.x , -1)
+		player.dir.y = -1
+		player.dir.x = prev.x
 	if player.position.y <= 0 + (player.size.y / 2):
-		player.dir = Vector2(prev.x , 1)
+		player.dir.y = 1
+		Global.scores[loaded] += player.held
+		player.held = 0
+	
 
 func _input(event: InputEvent) -> void:
 	if playing:

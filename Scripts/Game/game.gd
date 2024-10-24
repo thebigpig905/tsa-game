@@ -11,6 +11,7 @@ func _ready() -> void:
 		level.position.x = lvlSize.x * i
 		level.size = lvlSize
 		add_child(level)
+		Global.scores.append(0)
 	$Start.start()
 
 func _process(delta: float) -> void:

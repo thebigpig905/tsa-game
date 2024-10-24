@@ -19,3 +19,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				if i == body:
 					get_parent().remove_child(i)
 					i.queue_free()
+	if held == Global.settings["weight"]:
+		dir.y = -1
+	
