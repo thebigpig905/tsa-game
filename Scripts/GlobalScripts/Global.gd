@@ -10,6 +10,8 @@ var level = preload("res://Scenes/level.tscn")
 var player = preload("res://Scenes/player.tscn")
 var item = preload("res://Scenes/powerup.tscn")
 var setting = preload("res://Scenes/settings.tscn")
+var info = preload("res://Scenes/player_info.tscn")
+var stats = preload("res://Scenes/stats.tscn")
 
 var playerNames = ["Player 1"]
 var col = [0]

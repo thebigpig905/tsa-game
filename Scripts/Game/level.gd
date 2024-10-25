@@ -17,7 +17,8 @@ var maxY:int
 
 
 func _ready() -> void:
-	background.color = Global.colors[Global.col[loaded]]
+	player.plr = loaded
+	background.color = Color.TEAL
 	background.size.x = size.x
 	background.size.y = len + (len * ((Global.settings["length"] - 1) / 2.0)) #base length + half of length level
 	maxY = background.size.y
@@ -66,7 +67,7 @@ func _process(delta: float) -> void:
 		player.dir.y = -1
 	if player.position.y <= 0 + (player.size.y / 2):
 		player.dir.y = 1
-		Global.scores[loaded] += player.held
+		Global.scores[loaded] += player.held * 100
 		player.held = 0
 	
 

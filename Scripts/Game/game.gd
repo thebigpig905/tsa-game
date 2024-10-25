@@ -1,8 +1,10 @@
 extends Control
 var paused: bool = false
 var lvlSize: Vector2
+var levels = []
 
 func _ready() -> void:
+	Global.scores = []
 	lvlSize = Global.screen / Vector2(Global.players , 1)
 	lvlSize.y *= 0.85
 	for i in Global.players:
@@ -10,8 +12,13 @@ func _ready() -> void:
 		level.loaded = i
 		level.position.x = lvlSize.x * i
 		level.size = lvlSize
+		levels.append(level)
 		add_child(level)
 		Global.scores.append(0)
+	var score = Global.stats.instantiate()
+	score.size.y = Global.screen.y - lvlSize.y
+	score.position.y = Global.screen.y - score.size.y
+	add_child(score)
 	$Start.start()
 
 func _process(delta: float) -> void:
