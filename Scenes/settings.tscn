@@ -51,6 +51,7 @@ button_pressed = true
 
 [node name="Teams" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 
 [node name="Level Length" type="OptionButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,18 +69,21 @@ popup/item_3/id = 3
 layout_mode = 2
 text = "1"
 placeholder_text = "rounds"
+editable = false
 expand_to_text_length = true
 
 [node name="Max Lives" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "5"
 placeholder_text = "max lives"
+editable = false
 expand_to_text_length = true
 
 [node name="Time" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "180"
 placeholder_text = "game time (seconds)"
+editable = false
 expand_to_text_length = true
 
 [node name="Weight" type="LineEdit" parent="HBoxContainer/VBoxContainer"]

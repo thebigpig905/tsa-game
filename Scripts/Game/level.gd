@@ -42,8 +42,9 @@ func _ready() -> void:
 		if randi_range(0 , 2) > 0:
 			var newFish = Global.item.instantiate()
 			newFish.type = "fish"
-			if randi_range(1 , 12) == 3:
-				newFish.type = "power"
+			if Global.settings["powerups"] == true:
+				if randi_range(1 , 16) == 3:
+					newFish.type = "power"
 			newFish.position.x = randi_range(10 , lvlsize.x - 10)
 			newFish.position.y = (100 * i) + 200
 			$SubViewportContainer/SubViewport.add_child(newFish)
