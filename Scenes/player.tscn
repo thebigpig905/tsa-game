@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://vl27g7nuolo1"]
+[gd_scene load_steps=5 format=3 uid="uid://vl27g7nuolo1"]
 
 [ext_resource type="Script" path="res://Scripts/Game/player.gd" id="1_8lnu7"]
 [ext_resource type="Texture2D" uid="uid://b5bwevmkkrqim" path="res://Assets/Placeholders/hook.png" id="2_2bnxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc1vp"]
+radius = 11.7047
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fx8si"]
+radius = 16.7631
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8lnu7")
@@ -21,6 +25,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 5)
-shape = SubResource("CircleShape2D_qc1vp")
+shape = SubResource("CircleShape2D_fx8si")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -62,7 +62,8 @@ func _process(delta: float) -> void:
 		player.dir.x = 1
 	if player.position.y >= maxY - (player.size.y / 2):
 		player.dir.y = -1
-		player.dir.x = prev.x
+		if player.dir.y == 2:
+			player.dir.x = prev.x
 	if player.position.y <= 0 + (player.size.y / 2):
 		player.dir.y = 1
 		Global.scores[loaded] += player.held
