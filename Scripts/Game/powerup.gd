@@ -15,8 +15,13 @@ func _ready() -> void:
 			dir = Vector2(-1 , 0)
 	if type == "power":
 		$Sprite2D.texture = Global.HOOK
+		
 func _physics_process(delta: float) -> void:
 	velocity = speed * dir
 	move_and_slide()
 	if get_slide_collision_count() > 0:
 		dir *= -1
+	if dir.x == -1:
+		$Sprite2D.flip_h = true
+	elif dir.x == 1:
+		$Sprite2D.flip_h = false
