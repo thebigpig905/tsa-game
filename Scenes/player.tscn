@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://vl27g7nuolo1"]
 
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_8lnu7"]
+[ext_resource type="Script" path="res://Scripts/Game/player.gd" id="1_8lnu7"]
 [ext_resource type="Texture2D" uid="uid://b5bwevmkkrqim" path="res://Assets/Placeholders/hook.png" id="2_2bnxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc1vp"]
