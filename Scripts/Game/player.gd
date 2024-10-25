@@ -19,3 +19,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				if i == body:
 					get_parent().remove_child(i)
 					i.queue_free()
+	if body.type == "power":
+		pass

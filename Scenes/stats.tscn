@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1pq735p8o7e2"]
+
+[ext_resource type="Script" path="res://Scripts/UI/stats.gd" id="1_4cqh3"]
+
+[node name="Stats" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4cqh3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
