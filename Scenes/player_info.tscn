@@ -24,24 +24,28 @@ text = "WWWWWWWW"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="hp" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="hp" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "HP: "
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Score" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="Score" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Score: 1000"
 
-[node name="fish" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="fish" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Fish held: 800/800"

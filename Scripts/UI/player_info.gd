@@ -1,12 +1,12 @@
 extends CenterContainer
 var plr:int
-@onready var fish: Label = $VBoxContainer/VBoxContainer/fish
-@onready var score: Label = $VBoxContainer/VBoxContainer/Score
+@onready var fish: Label = $VBoxContainer/MarginContainer/VBoxContainer/fish
+@onready var score: Label = $VBoxContainer/MarginContainer/VBoxContainer/Score
 @onready var plrname: Label = $VBoxContainer/ColorRect/Name
 @onready var plrbox: ColorRect = $VBoxContainer/ColorRect
 @onready var v: VBoxContainer = $VBoxContainer
-@onready var h: HBoxContainer = $VBoxContainer/VBoxContainer/HBoxContainer
-@onready var hp: Label = $VBoxContainer/VBoxContainer/HBoxContainer/hp
+@onready var h: HBoxContainer = $VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer
+@onready var hp: Label = $VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/hp
 
 
 # Called when the node enters the scene tree for the first time.
