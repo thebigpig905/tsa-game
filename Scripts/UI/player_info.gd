@@ -1,26 +1,26 @@
 extends CenterContainer
 var plr:int
-@onready var score: Label = $VBoxContainer/HBoxContainer/VBoxContainer/Score
-@onready var fish: Label = $VBoxContainer/HBoxContainer/VBoxContainer/fish
+@onready var fish: Label = $VBoxContainer/VBoxContainer/fish
+@onready var score: Label = $VBoxContainer/VBoxContainer/Score
 @onready var plrname: Label = $VBoxContainer/ColorRect/Name
-@onready var color_rect: ColorRect = $VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer/ColorRect
-@onready var color_rect_2: ColorRect = $VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer/ColorRect2
+@onready var plrbox: ColorRect = $VBoxContainer/ColorRect
+@onready var v: VBoxContainer = $VBoxContainer
+@onready var h: HBoxContainer = $VBoxContainer/VBoxContainer/HBoxContainer
+@onready var hp: Label = $VBoxContainer/VBoxContainer/HBoxContainer/hp
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBoxContainer/ColorRect.custom_minimum_size = size / Vector2(1 , 3)
+	v.custom_minimum_size = size
+	plrbox.custom_minimum_size = size / Vector2(1 , 3)
 	plrname.custom_minimum_size = size / Vector2(1 , 3)
 	$VBoxContainer/ColorRect.color = Global.colors[Global.col[plr]]
-	$VBoxContainer/HBoxContainer.custom_minimum_size.x = size.x
-	$VBoxContainer/HBoxContainer.custom_minimum_size.y = (size.y / 3) * 2
+	score.custom_minimum_size.y = size.y / 4
+	fish.custom_minimum_size.y = size.y / 4
+	h.custom_minimum_size.y = size.y / 4
+	hp.custom_minimum_size.y = size.y / 4
 	plrname.text = Global.playerNames[plr]
-	score.custom_minimum_size.y = size.y / 3
-	score.custom_minimum_size.x = size.x / 2
-	fish.custom_minimum_size.y = size.y / 3
-	fish.custom_minimum_size.x = size.x / 2
-	$VBoxContainer/HBoxContainer/CenterContainer.custom_minimum_size.y = (size.y / 3) * 2
-	$VBoxContainer/HBoxContainer/CenterContainer.custom_minimum_size.x = size.x / 2
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

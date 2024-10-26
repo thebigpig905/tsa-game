@@ -6,7 +6,7 @@ var buttons = {"main" : ["Play" , "Controls" , "Settings" , "Credits" , "Exit Ga
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 
 "editControls": ["Switch Directions" , "Use Item" , "Reset Controls" ,  "Back "] , 
-"settings": ["Back"]}
+"settings": ["Reset" , "Back"]}
 var prev: String
 var pc: int = 4
 var block = false
@@ -84,6 +84,10 @@ func _on_btn_clicked(btn):
 				get_tree().quit()
 			"Settings":
 				type = "settings"
+				updateButtons()
+			"Reset":
+				for i in Global.settings:
+					Global.settings[i] = Global.settingsDef[i]
 				updateButtons()
 			_:
 				print("could not find button: " , btn)

@@ -10,3 +10,6 @@ script = ExtResource("1_akv7e")
 [node name="Start" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="End" type="Timer" parent="."]
+one_shot = true

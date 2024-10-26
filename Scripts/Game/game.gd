@@ -7,6 +7,7 @@ func _ready() -> void:
 	Global.scores = []
 	lvlSize = Global.screen / Vector2(Global.players , 1)
 	lvlSize.y *= 0.85
+	lvlSize.y = clamp(lvlSize.y , INF , Global.screen.y - 130)
 	for i in Global.players:
 		var level = Global.level.instantiate()
 		level.loaded = i
@@ -20,6 +21,7 @@ func _ready() -> void:
 	score.position.y = Global.screen.y - score.size.y
 	add_child(score)
 	$Start.start()
+	$End.wait_time = Global.settings["timer"]
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
