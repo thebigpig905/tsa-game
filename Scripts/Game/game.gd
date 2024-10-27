@@ -5,6 +5,7 @@ var levels = []
 @onready var time: Label = $Time
 var started = false
 var finished = false
+var round:int = 1
 
 func _ready() -> void:
 	time.size.x = Global.screen.x

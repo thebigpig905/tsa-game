@@ -20,6 +20,10 @@ func _ready() -> void:
 					sort.append(Global.scores[i])
 					plrs.append(i)
 	print(plrs)
+	if Global.settings["rounds"] > 1:
+		var l = Global.roundnum.instantiate()
+		l.text = "Round " + str(get_parent().round)
+		$VBoxContainer.add_child(l)
 	for i in Global.players:
 		var plr = Global.endPlr.instantiate()
 		if i != 0:
@@ -33,6 +37,11 @@ func _ready() -> void:
 			prev = i
 		plr.plr = plrs[i]
 		$VBoxContainer.add_child(plr)
+	if Global.settings["rounds"] - get_parent().round > 0:
+		var next = Global.menuBtnScn.instantiate()
+		next.btnName = "Next Round"
+		next.connect("clicked" , Callable(self , "_next"))
+		$VBoxContainer.add_child(next)
 	var btns = Global.menuBtnScn.instantiate()
 	btns.btnName = "Main Menu"
 	btns.connect("clicked" , Callable(self , "_on_btn_clicked"))
@@ -41,3 +50,7 @@ func _ready() -> void:
 
 func _on_btn_clicked(btn):
 	get_tree().reload_current_scene()
+	
+func _next(btn):
+	get_parent().round += 1
+	get_parent().get_parent().startgame(Global.scores , get_parent().round)
