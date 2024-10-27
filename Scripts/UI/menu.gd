@@ -102,15 +102,16 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				print("could not find button: " , btn) #if button pressed does not appear in the above list, add it
 			
 func _on_close(node): #removes player from selection screen
-	Global.players -= 1  #removes player grom global player var
-	for i in $ButtonHolder/C/HButtonHolder.get_child_count(): #runs through other player selections to match it
-		if $ButtonHolder/C/HButtonHolder.get_child(i) == node:
-			Global.playerNames.remove_at(i) #if it is matched remove the playername in that position from global var
-			Global.col.remove_at(i) #same with selected color
-	for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
-		$ButtonHolder/C/HButtonHolder.remove_child(i)
-		i.queue_free()
-	addSelect(Global.players) #reloads player selection
+	if Global.players > 1:
+		Global.players -= 1  #removes player grom global player var
+		for i in $ButtonHolder/C/HButtonHolder.get_child_count(): #runs through other player selections to match it
+			if $ButtonHolder/C/HButtonHolder.get_child(i) == node:
+				Global.playerNames.remove_at(i) #if it is matched remove the playername in that position from global var
+				Global.col.remove_at(i) #same with selected color
+		for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
+			$ButtonHolder/C/HButtonHolder.remove_child(i)
+			i.queue_free()
+		addSelect(Global.players) #reloads player selection
 		
 func _on_add(): #add player when told to
 	Global.players += 1 #add player to global var
