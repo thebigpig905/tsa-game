@@ -1,6 +1,6 @@
 extends Node
 
-var players: int = 1
+var players: int = 2
 var menuBtnScn = preload("res://Scenes/menuButton.tscn")
 var plrBtnScn = preload("res://Scenes/CharSelect.tscn")
 var menu = preload("res://Scenes/menu.tscn")
@@ -16,8 +16,8 @@ var endScreen = preload("res://Scenes/end_screen.tscn")
 var endPlr = preload("res://Scenes/end_name.tscn")
 var roundnum = preload("res://Scenes/round.tscn")
 
-var playerNames = ["Player 1"]
-var col = [0]
+var playerNames = ["Player 1" , "Player 2"]
+var col = [0 , 1]
 var scores = []
 var powers = []
 
