@@ -7,7 +7,7 @@ var buttons = {"main" : ["Play" , "Controls" , "Settings" , "Credits" , "Exit Ga
 "inGame": ["Start" , "Back"] , 
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 
-"editControls": ["Switch Directions" , "Use Item" , "Reset Controls" ,  "Back "] , 
+"editControls": ["Switch Directions" , "Reel In Hook" , "Reset Controls" ,  "Back "] , 
 "settings": ["Reset" , "Back"] , 
 "end": ["Main Menu"]}
 #what page was the menu first loaded on
@@ -76,7 +76,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				Global.switch[pc] = new
 				block = false
 				updateButtons()
-			"Use Item":
+			"Reel In Hook":
 				$ButtonHolder.get_child(2).get_child(0).text = "Awaiting Input"
 				block = true
 				await inputs

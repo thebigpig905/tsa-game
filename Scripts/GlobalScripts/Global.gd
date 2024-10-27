@@ -38,8 +38,18 @@ const PURPLE_FISH = preload("res://Assets/Placeholders/purpleFish.png")
 const RED_FISH = preload("res://Assets/Placeholders/redFish.png")
 const YELLOW_FISH = preload("res://Assets/Placeholders/yellowFish.png")
 
+const PUFFERFISH = preload("res://Assets/Placeholders/pufferfish.png")
+
+const BIG_HOOK = preload("res://Assets/Placeholders/bigHook.png")
+const BONUS = preload("res://Assets/Placeholders/bonus.png")
+const FRENZY = preload("res://Assets/Placeholders/frenzy.png")
+const SHEILD = preload("res://Assets/Placeholders/sheild.png")
+const SLOWHOOK = preload("res://Assets/Placeholders/slowhook.png")
+const SPEEDFISH = preload("res://Assets/Placeholders/speedfish.png")
+
 var textures = {"blueFish":BLUE_FISH , "greenFish":GREEN_FISH , "orangeFish": ORANGE_FISH , "purpleFish":PURPLE_FISH , 
-"redFish":RED_FISH , "yellowFish": YELLOW_FISH , "hook":HOOK}
+"redFish":RED_FISH , "yellowFish": YELLOW_FISH , "hook":HOOK , "pufferfish":PUFFERFISH ,
+"sheild":SHEILD , "pslow":SLOWHOOK , "pfast":SPEEDFISH , "bonus":BONUS , "size":BIG_HOOK , "frenzy":FRENZY}
 
 var colors = [Color.RED , Color.DARK_ORANGE , Color.GOLD , Color.WEB_GREEN , Color.MEDIUM_BLUE , Color.WEB_PURPLE , Color.WEB_GRAY , Color.HOT_PINK]
 

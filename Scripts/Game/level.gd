@@ -11,13 +11,14 @@ var playing = false
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
 var prev:Vector2 = Vector2(1 , 1)
-var level:int = 1
+var level:int = 0
 var fish_left:int = 0
 
 var len = 1000
 var maxY:int
 
 var fishes = []
+var sheilded:bool = false
 
 
 func _ready() -> void:
@@ -51,6 +52,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	$sheild.visible = sheilded
 	if get_parent().paused == true:
 		player.p = 0
 		for i in fishes:
@@ -69,12 +71,17 @@ func _process(delta: float) -> void:
 			player.dir.x = prev.x
 		player.dir.y = -1
 	if player.position.y <= 0 + (player.size.y / 2):
+		player.ext = Vector2(1 , 1)
+		player.scale = Vector2(1 , 1)
 		player.dir.y = 1
-		Global.scores[loaded] += player.held * 100
-		if fish_left <= Global.settings["weight"] / 2:
+		if $FrenzyTimer.time_left != 0:
+			Global.scores[loaded] += player.held * 150
+		else:
+			Global.scores[loaded] += player.held * 100
+		if fish_left <= Global.settings["weight"] - 1:
 			fish_left = 0
-			create_fishes()
 			level += 1
+			create_fishes()
 		player.held = 0
 	
 
@@ -93,6 +100,13 @@ func _input(event: InputEvent) -> void:
 			else:
 				if player.dir == Vector2(0 , 2):
 					player.dir = prev
+		if event.as_text() == Global.use[loaded]:
+			if event.is_pressed() == true:
+				if event.is_echo() == false:
+					if player.held > 0:
+						if player.dir.y == 2:
+							player.dir.x = prev.x
+						player.dir.y = -1
 
 func create_fishes():
 	for i in $SubViewportContainer/SubViewport.get_children():
@@ -112,4 +126,45 @@ func create_fishes():
 			newFish.position.x = randi_range(10 , lvlsize.x - 10)
 			newFish.position.y = (100 * i) + 200
 			fishes.append(newFish)
-			$SubViewportContainer/SubViewport.add_child(newFish)
+	var bad = []
+	for i in fishes:
+		if i.type == "fish":
+			bad.append(i)
+	for i in clamp(level , 0 , Global.settings["length"] * 2):
+		var rand = randi_range(0 , bad.size() - 1)
+		if bad[rand].type != "bad":
+			bad[rand].type = "bad"
+			fish_left -= 1
+	for i in fishes:
+		$SubViewportContainer/SubViewport.add_child(i)
+
+
+func _on_player_power(type: Variant) -> void:
+	match type:
+		"sheild":
+			sheilded = true
+		"pslow":
+			for i in get_parent().get_child_count():
+				if get_parent().get_child(i).has_method("_on_player_power"):
+					if get_parent().get_child(i) != self:
+						if get_parent().get_child(i).sheilded == false:
+							get_parent().get_child(i).player.ext = Vector2(0.5 , 1)
+						else:
+							get_parent().get_child(i).sheilded = false
+		"pfast":
+			for i in get_parent().get_child_count():
+				if get_parent().get_child(i).has_method("_on_player_power"):
+					if get_parent().get_child(i) != self:
+						if get_parent().get_child(i).sheilded == false:
+							for k in get_parent().get_child(i).get_child(0).get_child(0).get_children():
+								if k.has_method("fish"):
+									k.speed = randi_range(175 , 300)
+						else:
+							get_parent().get_child(i).sheilded = false
+		"bonus":
+			Global.scores[loaded] += 50
+		"size":
+			player.scale = Vector2(2 , 2)
+		"frenzy":
+			$FrenzyTimer.start()
+			player.frenzy = true

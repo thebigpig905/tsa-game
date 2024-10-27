@@ -9,7 +9,7 @@ func _ready() -> void:
 	if alt != null:
 		if btnName == "Switch Directions": #adds the key bound if the button is keybind button
 			$Label.text += ": " + str(Global.switch[alt])
-		if btnName == "Use Item":
+		if btnName == "Reel In Hook":
 			$Label.text += ": " + str(Global.use[alt])
 	if $Label.get_line_count() > 1: #sets smaller font size if text is too big for button
 		$Label.add_theme_font_size_override("font_size" , 16)

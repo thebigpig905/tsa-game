@@ -2,20 +2,33 @@ extends CharacterBody2D
 
 var type:String
 const FISHES = ["blueFish" , "greenFish" , "orangeFish" , "purpleFish" , "redFish" , "yellowFish"]
-var powers = []
+var powers = ["sheild" , "pslow" , "pfast" , "bonus" , "size" , "frenzy"]
 var dir:Vector2 = Vector2(0 , 0)
 var speed = 50
 var p = 1
+var num:int
 
 func _ready() -> void:
+	num = randi_range(0 , powers.size() - 1)
 	if type == "fish":
 		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , 5)]]
 		if randi_range(1 , 2) == 1:
 			dir = Vector2(1 , 0)
 		else:
 			dir = Vector2(-1 , 0)
+	
 	if type == "power":
-		$Sprite2D.texture = Global.HOOK
+		$Sprite2D.texture = Global.textures[powers[num]]
+		if powers[num] != "size":
+			scale = Vector2(1.5 , 1.5)
+	
+	if type == "bad":
+		$Sprite2D.texture = Global.PUFFERFISH
+		scale = Vector2(1.5 , 1.5)
+		if randi_range(1 , 2) == 1:
+			dir = Vector2(1 , 0)
+		else:
+			dir = Vector2(-1 , 0)
 		
 func _physics_process(delta: float) -> void:
 	velocity = speed * dir * p
