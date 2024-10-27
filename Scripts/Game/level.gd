@@ -31,16 +31,16 @@ func _ready() -> void:
 	$SubViewportContainer.size = lvlsize
 	$SubViewportContainer/SubViewport.size = lvlsize
 	cam.position.x = $SubViewportContainer.size.x / 2
-	left.get_child(0).scale.y = maxY / 5
-	left.position.x = -5
+	left.scale.y = maxY / 5
+	left.position.x = 2
 	left.position.y = (maxY / 2) - 150
-	right.get_child(0).scale.y = maxY / 5
-	right.position.x = lvlsize.x + 5
+	right.scale.y = maxY / 5
+	right.position.x = lvlsize.x - 2
 	right.position.y = (maxY / 2) - 150
-	top.get_child(0).scale.x = lvlsize.x / 10
+	top.scale.x = lvlsize.x / 10
 	top.position.x = lvlsize.x / 2
 	top.position.y = -5
-	bottom.get_child(0).scale.x = lvlsize.x / 10
+	bottom.scale.x = lvlsize.x / 10
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
 	create_fishes()
@@ -60,9 +60,9 @@ func _process(delta: float) -> void:
 		for i in fishes:
 			i.p = 1
 	cam.position.y = player.position.y
-	if player.position.x >= lvlsize.x - (player.size.x / 2):
+	if player.position.x >= lvlsize.x - (player.size.x / 2) - 2:
 		player.dir.x = -1
-	if player.position.x <= player.size.x / 2:
+	if player.position.x <= player.size.x / 2 + 2:
 		player.dir.x = 1
 	if player.position.y >= maxY - (player.size.y / 2):
 		if player.dir.y == 2:

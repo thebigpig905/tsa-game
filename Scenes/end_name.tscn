@@ -50,5 +50,6 @@ text = "Score: 900000000000"
 [node name="Place" type="Label" parent="HBoxContainer/ScoreBG/HBoxContainer"]
 custom_minimum_size = Vector2(30, 16)
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
 text = "#1"

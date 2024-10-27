@@ -79,7 +79,6 @@ vertical_alignment = 1
 [node name="LineEdit" parent="MarginContainer/CenterContainer" instance=ExtResource("2_jxkit")]
 visible = false
 layout_mode = 2
-clear_button_enabled = true
 caret_blink = true
 
 [node name="Remove" type="ColorRect" parent="."]

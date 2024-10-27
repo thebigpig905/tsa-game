@@ -1,6 +1,7 @@
 extends CenterContainer
 var sort = []
 var plrs = []
+var prev
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,7 +22,15 @@ func _ready() -> void:
 	print(plrs)
 	for i in Global.players:
 		var plr = Global.endPlr.instantiate()
-		plr.loaded = i
+		if i != 0:
+			if sort[i] == sort[i - 1]:
+				plr.loaded = prev
+			else:
+				plr.loaded = i
+				prev = i
+		else:
+			plr.loaded = i
+			prev = i
 		plr.plr = plrs[i]
 		$VBoxContainer.add_child(plr)
 	var btns = Global.menuBtnScn.instantiate()
