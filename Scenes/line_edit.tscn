@@ -6,3 +6,4 @@ offset_bottom = 24.0
 placeholder_text = "Enter Name"
 max_length = 8
 expand_to_text_length = true
+clear_button_enabled = true

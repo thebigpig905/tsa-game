@@ -1,32 +1,39 @@
 extends CenterContainer
 signal inputs
+#what menu to load
 var type: String
+#buttons that go with each menu type
 var buttons = {"main" : ["Play" , "Controls" , "Settings" , "Credits" , "Exit Game"] , 
 "inGame": ["Start" , "Back"] , 
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 
 "editControls": ["Switch Directions" , "Use Item" , "Reset Controls" ,  "Back "] , 
-"settings": ["Reset" , "Back"]}
+"settings": ["Reset" , "Back"] , 
+"end": ["Main Menu"]}
+#what page was the menu first loaded on
 var prev: String
+#idfk
 var pc: int = 4
+#block button inputs
 var block = false
+#i forgor
 var new: String
 
 
 func _ready() -> void:
-	size = Global.screen
-	updateButtons()
-	prev = type
+	size = Global.screen #resize
+	updateButtons() #read it
+	prev = type #sets the first load type
 	
 func _process(delta: float) -> void:
-	size = Global.screen
-func _on_btn_clicked(btn):
-	if !block:
-		match btn:
+	size = Global.screen #resize constantly
+func _on_btn_clicked(btn): #btn in type of button that was pressed
+	if !block: 
+		match btn: #runs logic for buttons on pressed
 			"Play":
-				type = "inGame"
-				addSelect(Global.players)
-				updateButtons()
+				type = "inGame" #sets the menu type so the buttons change when reloaded
+				addSelect(Global.players) #special line
+				updateButtons() #reloads menu
 			"Back":
 				type = prev
 				updateButtons()
@@ -37,15 +44,15 @@ func _on_btn_clicked(btn):
 				type = "controls"
 				updateButtons()
 			"Start":
-				get_parent().add_child(Global.game.instantiate())
-				get_parent().remove_child(self)
+				get_parent().add_child(Global.game.instantiate()) #starts the main game
+				get_parent().remove_child(self) #removes self
 				queue_free()
 			"Resume":
 				get_parent().paused = false
 				get_parent().remove_child(self)
 				queue_free()
 			"Quit":
-				get_tree().reload_current_scene()
+				get_tree().reload_current_scene() #restarts the game
 			"Player 1":
 				pc = 0
 				type = "editControls"
@@ -81,7 +88,7 @@ func _on_btn_clicked(btn):
 				Global.use[pc] = Global.useDef[pc]
 				updateButtons()
 			"Exit Game":
-				get_tree().quit()
+				get_tree().quit() #exits the game
 			"Settings":
 				type = "settings"
 				updateButtons()
@@ -89,35 +96,37 @@ func _on_btn_clicked(btn):
 				for i in Global.settings:
 					Global.settings[i] = Global.settingsDef[i]
 				updateButtons()
+			"Main Menu":
+				get_tree().reload_current_scene()
 			_:
-				print("could not find button: " , btn)
+				print("could not find button: " , btn) #if button pressed does not appear in the above list, add it
 			
-func _on_close(node):
-	Global.players -= 1
-	for i in $ButtonHolder/C/HButtonHolder.get_child_count():
+func _on_close(node): #removes player from selection screen
+	Global.players -= 1  #removes player grom global player var
+	for i in $ButtonHolder/C/HButtonHolder.get_child_count(): #runs through other player selections to match it
 		if $ButtonHolder/C/HButtonHolder.get_child(i) == node:
-			Global.playerNames.remove_at(i)
-			Global.col.remove_at(i)
-	for i in $ButtonHolder/C/HButtonHolder.get_children():
+			Global.playerNames.remove_at(i) #if it is matched remove the playername in that position from global var
+			Global.col.remove_at(i) #same with selected color
+	for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
 		$ButtonHolder/C/HButtonHolder.remove_child(i)
 		i.queue_free()
-	addSelect(Global.players)
+	addSelect(Global.players) #reloads player selection
 		
-func _on_add():
-	Global.players += 1
-	Global.col.append(Global.players - 1)
-	Global.playerNames.append("Player " + str($ButtonHolder/C/HButtonHolder.get_child_count()))
-	for i in $ButtonHolder/C/HButtonHolder.get_children():
+func _on_add(): #add player when told to
+	Global.players += 1 #add player to global var
+	Global.col.append(Global.players - 1) #adds a default color for the player select
+	Global.playerNames.append("Player " + str($ButtonHolder/C/HButtonHolder.get_child_count())) #generates name
+	for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
 		$ButtonHolder/C/HButtonHolder.remove_child(i)
 		i.queue_free()
-	addSelect(Global.players)
+	addSelect(Global.players) #reloads player selection
 	
 func updateButtons():
 	for i in $ButtonHolder.get_children():
-		if i is not CenterContainer:
-			$ButtonHolder.remove_child(i)
+		if i is not CenterContainer: #centerContainer is there for player selection screen
+			$ButtonHolder.remove_child(i) #removes all old buttons
 			i.queue_free()
-		elif i.name == "Settings":
+		elif i.name == "Settings": #remove if centerContainer is the settings scene
 			$ButtonHolder.remove_child(i)
 			i.queue_free()
 	if type != "inGame":
@@ -125,18 +134,18 @@ func updateButtons():
 			$ButtonHolder/C/HButtonHolder.remove_child(i)
 			i.queue_free()
 	if type == "settings":
-		var menu = Global.setting.instantiate()
+		var menu = Global.setting.instantiate() #if you are loading the settings page, add the settings scene
 		$ButtonHolder.add_child(menu)
-	for i in buttons[type].size():
+	for i in buttons[type].size(): #runs through the array of button names in the dictionary with the keythat is the type of menu loaded
 		var newbtn = Global.menuBtnScn.instantiate()
 		newbtn.btnName = buttons[type][i]
 		if pc < 4:
 			newbtn.alt = pc
 		$ButtonHolder.add_child(newbtn)
-		newbtn.connect("clicked" , Callable(self , "_on_btn_clicked"))
+		newbtn.connect("clicked" , Callable(self , "_on_btn_clicked")) #connects the clicked signal to the button
 		
 func addSelect(num):
-	for i in clamp(num + 1 , 1 , 4):
+	for i in clamp(num + 1 , 1 , 4): #clamps at 4 because 4 is max players
 		var newbtn = Global.plrBtnScn.instantiate()
 		if i != num:
 			newbtn.playerName = Global.playerNames[i]
@@ -147,6 +156,6 @@ func addSelect(num):
 		$ButtonHolder/C/HButtonHolder.add_child(newbtn)
 
 func _input(event: InputEvent) -> void:
-	if event.as_text().length() < 14:
+	if event.as_text().length() < 14: #this is for button rebinding
 		new = event.as_text()
 		inputs.emit()

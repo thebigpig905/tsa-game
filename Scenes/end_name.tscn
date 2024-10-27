@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://babsvd5t60tjx"]
+
+[ext_resource type="Script" path="res://Scripts/Game/end_name.gd" id="1_ierx5"]
+
+[node name="EndName" type="CenterContainer"]
+offset_right = 900.0
+offset_bottom = 80.0
+script = ExtResource("1_ierx5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="background" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+color = Color(0.462291, 0.462291, 0.462291, 1)
+
+[node name="PlayerName" type="Label" parent="HBoxContainer/background"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 32
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBG" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+color = Color(0.446777, 0.446777, 0.446777, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScoreBG"]
+custom_minimum_size = Vector2(600, 80)
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ScoreBG/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="Score" type="Label" parent="HBoxContainer/ScoreBG/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Score: 900000000000"
+
+[node name="Place" type="Label" parent="HBoxContainer/ScoreBG/HBoxContainer"]
+custom_minimum_size = Vector2(30, 16)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "#1"

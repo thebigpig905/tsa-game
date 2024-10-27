@@ -11,9 +11,13 @@ var playing = false
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
 var prev:Vector2 = Vector2(1 , 1)
+var level:int = 1
+var fish_left:int = 0
 
 var len = 1000
 var maxY:int
+
+var fishes = []
 
 
 func _ready() -> void:
@@ -39,16 +43,7 @@ func _ready() -> void:
 	bottom.get_child(0).scale.x = lvlsize.x / 10
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
-	for i in (maxY - 200) / 100:
-		if randi_range(0 , 2) > 0:
-			var newFish = Global.item.instantiate()
-			newFish.type = "fish"
-			if Global.settings["powerups"] == true:
-				if randi_range(1 , 16) == 3:
-					newFish.type = "power"
-			newFish.position.x = randi_range(10 , lvlsize.x - 10)
-			newFish.position.y = (100 * i) + 200
-			$SubViewportContainer/SubViewport.add_child(newFish)
+	create_fishes()
 	await get_parent().get_child(0).timeout
 	playing = true
 	player.dir = Vector2(1 , 1)
@@ -56,6 +51,14 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	if get_parent().paused == true:
+		player.p = 0
+		for i in fishes:
+			i.p = 0
+	else:
+		player.p = 1
+		for i in fishes:
+			i.p = 1
 	cam.position.y = player.position.y
 	if player.position.x >= lvlsize.x - (player.size.x / 2):
 		player.dir.x = -1
@@ -68,6 +71,10 @@ func _process(delta: float) -> void:
 	if player.position.y <= 0 + (player.size.y / 2):
 		player.dir.y = 1
 		Global.scores[loaded] += player.held * 100
+		if fish_left <= Global.settings["weight"] / 2:
+			fish_left = 0
+			create_fishes()
+			level += 1
 		player.held = 0
 	
 
@@ -86,3 +93,23 @@ func _input(event: InputEvent) -> void:
 			else:
 				if player.dir == Vector2(0 , 2):
 					player.dir = prev
+
+func create_fishes():
+	for i in $SubViewportContainer/SubViewport.get_children():
+		if i.has_method("fish"):
+			$SubViewportContainer/SubViewport.remove_child(i)
+			i.queue_free()
+	fishes.clear()
+	for i in (maxY - 200) / 100:
+		if randi_range(0 , 3) > 0:
+			fish_left += 1
+			var newFish = Global.item.instantiate()
+			newFish.type = "fish"
+			if Global.settings["powerups"] == true:
+				if randi_range(1 , 16) == 3:
+					newFish.type = "power"
+					fish_left -= 1
+			newFish.position.x = randi_range(10 , lvlsize.x - 10)
+			newFish.position.y = (100 * i) + 200
+			fishes.append(newFish)
+			$SubViewportContainer/SubViewport.add_child(newFish)

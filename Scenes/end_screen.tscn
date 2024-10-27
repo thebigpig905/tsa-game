@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwom7mgyelysk"]
+
+[ext_resource type="Script" path="res://Scripts/Game/end_screen.gd" id="1_2einq"]
+
+[node name="EndScreen" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2einq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2

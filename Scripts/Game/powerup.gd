@@ -5,6 +5,7 @@ const FISHES = ["blueFish" , "greenFish" , "orangeFish" , "purpleFish" , "redFis
 var powers = []
 var dir:Vector2 = Vector2(0 , 0)
 var speed = 50
+var p = 1
 
 func _ready() -> void:
 	if type == "fish":
@@ -17,7 +18,7 @@ func _ready() -> void:
 		$Sprite2D.texture = Global.HOOK
 		
 func _physics_process(delta: float) -> void:
-	velocity = speed * dir
+	velocity = speed * dir * p
 	move_and_slide()
 	if get_slide_collision_count() > 0:
 		dir *= -1
@@ -25,3 +26,5 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = true
 	elif dir.x == 1:
 		$Sprite2D.flip_h = false
+func fish(): #THIS IS NOT USELESS DO NOT DELETE
+	pass
