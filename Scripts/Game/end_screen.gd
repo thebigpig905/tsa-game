@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 func _on_btn_clicked(btn):
+	Global.total.clear()
 	get_tree().reload_current_scene()
 	
 func _next(btn):
