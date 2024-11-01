@@ -11,7 +11,7 @@ var num:int
 func _ready() -> void:
 	num = randi_range(0 , powers.size() - 1)
 	if type == "fish":
-		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , FISHES.size() - 1)]]
+		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , 5)]]
 		if randi_range(1 , 2) == 1:
 			dir = Vector2(1 , 0)
 		else:
@@ -39,6 +39,5 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = true
 	elif dir.x == 1:
 		$Sprite2D.flip_h = false
-		
 func fish(): #THIS IS NOT USELESS DO NOT DELETE
 	pass
