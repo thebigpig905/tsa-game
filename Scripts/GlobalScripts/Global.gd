@@ -19,6 +19,7 @@ var roundnum = preload("res://Scenes/round.tscn")
 var playerNames = ["Player 1" , "Player 2"]
 var col = [0 , 1]
 var scores = []
+var total = []
 var powers = []
 
 var switch = ["Q" , "O" , "Left" , "Kp 5"]
@@ -26,7 +27,7 @@ var use = ["W" , "P" , "Right" , "Kp 6"]
 var switchDef = ["Q" , "O" , "Left" , "Kp 5"]
 var useDef = ["W" , "P" , "Right" , "Kp 6"]
 
-var settings = {"rounds": 1 , "powerups": true , "lives": 5 , "teams": false , "timer": 180 , "weight": 5 , "length": 2}
+var settings = {"rounds": 3 , "powerups": true , "lives": 5 , "teams": false , "timer": 18 , "weight": 5 , "length": 1}
 var settingsDef = {"rounds": 1 , "powerups": true , "lives": 5 , "teams": false , "timer": 180 , "weight": 5 , "length": 2}
 
 var screen:Vector2 = DisplayServer.window_get_size()
