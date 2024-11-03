@@ -225,6 +225,8 @@ func _on_player_damaged() -> void:
 		level = 0
 		fish_left = 0
 		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
+		if Global.scores[loaded] % 10 != 0:
+			Global.scores[loaded] -= 25
 		player.position.x = size.x / 2
 		player.position.y = 10
 		hp = Global.settings["lives"]
