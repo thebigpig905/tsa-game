@@ -48,7 +48,7 @@ func _ready() -> void:
 	bottom.position.y = background.size.y + 5
 	create_fishes(true)
 	if Global.players < 3:
-		level = 3
+		level = 1
 		create_fishes(false)
 	await get_parent().get_child(0).timeout
 	playing = true
@@ -221,4 +221,13 @@ func _on_player_power(type: Variant) -> void:
 
 func _on_player_damaged() -> void:
 	hp -= 1
-	print(loaded , " " , hp)
+	if hp <= 0:
+		level = 0
+		fish_left = 0
+		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
+		player.position.x = size.x / 2
+		player.position.y = 10
+		hp = Global.settings["lives"]
+		create_fishes(true)
+		if Global.players > 3:
+			create_fishes(false)
