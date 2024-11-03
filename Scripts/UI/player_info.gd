@@ -7,6 +7,7 @@ var plr:int
 @onready var v: VBoxContainer = $VBoxContainer
 @onready var h: HBoxContainer = $VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer
 @onready var hp: Label = $VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/hp
+@onready var hp_bar: TextureProgressBar = $VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/TextureProgressBar
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,3 +27,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	score.text = "Score: " + str(Global.scores[plr])
 	fish.text = "Fish held: " + str(get_parent().get_parent().get_parent().levels[plr].player.held) + "/" + str(Global.settings["weight"])
+	hp_bar.value = (get_parent().get_parent().get_parent().levels[plr].hp / float(Global.settings["lives"])) * 100

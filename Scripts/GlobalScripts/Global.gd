@@ -15,6 +15,7 @@ var stats = preload("res://Scenes/stats.tscn")
 var endScreen = preload("res://Scenes/end_screen.tscn")
 var endPlr = preload("res://Scenes/end_name.tscn")
 var roundnum = preload("res://Scenes/round.tscn")
+var obs = preload("res://Scenes/obstacle.tscn")
 
 var playerNames = ["Player 1" , "Player 2"]
 var col = [0 , 1]
@@ -27,7 +28,7 @@ var use = ["W" , "P" , "Right" , "Kp 6"]
 var switchDef = ["Q" , "O" , "Left" , "Kp 5"]
 var useDef = ["W" , "P" , "Right" , "Kp 6"]
 
-var settings = {"rounds": 3 , "powerups": true , "lives": 5 , "teams": false , "timer": 18 , "weight": 5 , "length": 1}
+var settings = {"rounds": 1 , "powerups": true , "lives": 5 , "teams": false , "timer": 180 , "weight": 5 , "length": 2}
 var settingsDef = {"rounds": 1 , "powerups": true , "lives": 5 , "teams": false , "timer": 180 , "weight": 5 , "length": 2}
 
 var screen:Vector2 = DisplayServer.window_get_size()
@@ -48,10 +49,13 @@ const FRENZY = preload("res://Assets/Placeholders/frenzy.png")
 const SHEILD = preload("res://Assets/Placeholders/sheild.png")
 const SLOWHOOK = preload("res://Assets/Placeholders/slowhook.png")
 const SPEEDFISH = preload("res://Assets/Placeholders/speedfish.png")
+const TRASH_1 = preload("res://Assets/Placeholders/trash1.png")
+const TRASH_2 = preload("res://Assets/Placeholders/trash2.png")
 
 var textures = {"blueFish":BLUE_FISH , "greenFish":GREEN_FISH , "orangeFish": ORANGE_FISH , "purpleFish":PURPLE_FISH , 
 "redFish":RED_FISH , "yellowFish": YELLOW_FISH , "hook":HOOK , "pufferfish":PUFFERFISH ,
-"sheild":SHEILD , "pslow":SLOWHOOK , "pfast":SPEEDFISH , "bonus":BONUS , "size":BIG_HOOK , "frenzy":FRENZY}
+"sheild":SHEILD , "pslow":SLOWHOOK , "pfast":SPEEDFISH , "bonus":BONUS , "size":BIG_HOOK , "frenzy":FRENZY , "trash1":TRASH_1 ,
+"trash2":TRASH_2}
 
 var colors = [Color.RED , Color.DARK_ORANGE , Color.GOLD , Color.WEB_GREEN , Color.MEDIUM_BLUE , Color.WEB_PURPLE , Color.WEB_GRAY , Color.HOT_PINK]
 

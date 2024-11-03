@@ -19,10 +19,12 @@ var maxY:int
 
 var fishes = []
 var sheilded:bool = false
+var hp:int
 
 
 func _ready() -> void:
 	player.plr = loaded
+	hp = Global.settings["lives"]
 	background.color = Color.TEAL
 	background.size.x = size.x
 	background.size.y = len + (len * ((Global.settings["length"] - 1) / 2.0)) #base length + half of length level
@@ -44,7 +46,10 @@ func _ready() -> void:
 	bottom.scale.x = lvlsize.x / 10
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
-	create_fishes()
+	create_fishes(true)
+	if Global.players < 3:
+		level = 3
+		create_fishes(false)
 	await get_parent().get_child(0).timeout
 	playing = true
 	player.dir = Vector2(1 , 1)
@@ -81,7 +86,9 @@ func _process(delta: float) -> void:
 		if fish_left <= Global.settings["weight"] - 1:
 			fish_left = 0
 			level += 1
-			create_fishes()
+			create_fishes(true)
+			if Global.players < 3:
+				create_fishes(false)
 		player.held = 0
 	
 
@@ -108,12 +115,14 @@ func _input(event: InputEvent) -> void:
 							player.dir.x = prev.x
 						player.dir.y = -1
 
-func create_fishes():
-	for i in $SubViewportContainer/SubViewport.get_children():
-		if i.has_method("fish"):
-			$SubViewportContainer/SubViewport.remove_child(i)
-			i.queue_free()
-	fishes.clear()
+func create_fishes(remove):
+	var skip = false
+	if remove:
+		for i in $SubViewportContainer/SubViewport.get_children():
+			if i.has_method("fish"):
+				$SubViewportContainer/SubViewport.remove_child(i)
+				i.queue_free()
+		fishes.clear()
 	for i in (maxY - 200) / 100:
 		if randi_range(0 , 3) > 0:
 			fish_left += 1
@@ -125,7 +134,24 @@ func create_fishes():
 					fish_left -= 1
 			newFish.position.x = randi_range(10 , lvlsize.x - 10)
 			newFish.position.y = (100 * i) + 200
-			fishes.append(newFish)
+			for k in fishes:
+				if k.position.y == newFish.position.y:
+					if abs(k.position.x - newFish.position.x) < 50:
+						newFish.queue_free()
+						fish_left -= 1
+						skip = true
+					break
+			if !remove:
+				if !skip:
+					if randi_range(0 , 2) > 0:
+						fishes.append(newFish)
+					else:
+						newFish.queue_free()
+						fish_left -= 1
+				else:
+					skip = false
+			else:
+				fishes.append(newFish)
 	var bad = []
 	for i in fishes:
 		if i.type == "fish":
@@ -134,9 +160,19 @@ func create_fishes():
 		var rand = randi_range(0 , bad.size() - 1)
 		if bad[rand].type != "bad":
 			bad[rand].type = "bad"
+			bad[rand].upds()
 			fish_left -= 1
 	for i in fishes:
 		$SubViewportContainer/SubViewport.add_child(i)
+	for i in level:
+		var obs = Global.obs.instantiate()
+		obs.position.x = Global.screen.x / Global.players * randi_range(0 , 1)
+		if obs.position.x == 0:
+			obs.position.x += 50
+		else:
+			obs.position.x -= 50
+		obs.position.y = randi_range(100 , maxY)
+		$SubViewportContainer/SubViewport.add_child(obs)
 
 
 func _on_player_power(type: Variant) -> void:
@@ -158,7 +194,8 @@ func _on_player_power(type: Variant) -> void:
 						if get_parent().get_child(i).sheilded == false:
 							for k in get_parent().get_child(i).get_child(0).get_child(0).get_children():
 								if k.has_method("fish"):
-									k.speed = randi_range(175 , 300)
+									if k.type != "power":
+										k.speed = randi_range(175 , 300)
 						else:
 							get_parent().get_child(i).sheilded = false
 		"bonus":
@@ -168,3 +205,20 @@ func _on_player_power(type: Variant) -> void:
 		"frenzy":
 			$FrenzyTimer.start()
 			player.frenzy = true
+		"trash1":
+			if sheilded:
+				sheilded = false
+			else:
+				Global.scores[loaded] -= 50
+				_on_player_damaged()
+		"trash2":
+			if sheilded:
+				sheilded = false
+			else:
+				Global.scores[loaded] -= 50
+				_on_player_damaged()
+
+
+func _on_player_damaged() -> void:
+	hp -= 1
+	print(loaded , " " , hp)

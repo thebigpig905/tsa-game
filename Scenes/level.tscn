@@ -89,5 +89,6 @@ offset_right = 76.0
 offset_bottom = 65.0
 texture = ExtResource("4_myn7e")
 
+[connection signal="damaged" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_damaged"]
 [connection signal="power" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_power"]
 [connection signal="timeout" from="FrenzyTimer" to="SubViewportContainer/SubViewport/Player" method="_on_frenzy_timer_timeout"]

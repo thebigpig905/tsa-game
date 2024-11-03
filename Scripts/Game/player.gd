@@ -1,5 +1,6 @@
 extends CharacterBody2D
 signal power(type)
+signal damaged
 var held: int = 0
 var specials
 var dir = Vector2(0 , 0)
@@ -33,7 +34,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 						break
 		else:
 			held += 1
-			get_parent().get_parent().get_parent().fish_left -= 1
+			get_parent().get_parent().get_parent().fish_left -= 1 #subviewport -> container -> level
 			for i in get_parent().get_parent().get_parent().fishes.size():
 				if get_parent().get_parent().get_parent().fishes[i] == body:
 					get_parent().get_parent().get_parent().fishes.remove_at(i)
@@ -60,7 +61,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			
 	if body.type == "power":
 		power.emit(body.powers[body.num])
-			
 				
 		for i in get_parent().get_parent().get_parent().fishes.size():
 			if get_parent().get_parent().get_parent().fishes[i] == body:
@@ -75,3 +75,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_frenzy_timer_timeout() -> void:
 	frenzy = false
+
+func hurt():
+	damaged.emit()
