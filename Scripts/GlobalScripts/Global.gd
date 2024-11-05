@@ -16,6 +16,7 @@ var endScreen = preload("res://Scenes/end_screen.tscn")
 var endPlr = preload("res://Scenes/end_name.tscn")
 var roundnum = preload("res://Scenes/round.tscn")
 var obs = preload("res://Scenes/obstacle.tscn")
+var score = preload("res://Scenes/score.tscn")
 
 var playerNames = ["Player 1" , "Player 2"]
 var col = [0 , 1]

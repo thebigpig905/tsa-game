@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba71sdex7keju"]
+
+[ext_resource type="Script" path="res://Scripts/Game/score.gd" id="1_00bfm"]
+
+[node name="score" type="Label"]
+offset_right = 40.0
+offset_bottom = 16.0
+theme_override_constants/outline_size = 4
+text = "+50"
+script = ExtResource("1_00bfm")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

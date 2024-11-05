@@ -13,7 +13,8 @@ func _ready() -> void:
 			$Label.text += ": " + str(Global.use[alt])
 	if $Label.get_line_count() > 1: #sets smaller font size if text is too big for button
 		$Label.add_theme_font_size_override("font_size" , 16)
-
+	if $Label.text == "Next Round":
+		$Label.add_theme_font_size_override("font_size" , 32)
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("clickL"): #if left clicked while in the button area emit the clicked signal
 		if isin:

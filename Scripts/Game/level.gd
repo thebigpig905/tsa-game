@@ -79,10 +79,17 @@ func _process(delta: float) -> void:
 		player.ext = Vector2(1 , 1)
 		player.scale = Vector2(1 , 1)
 		player.dir.y = 1
+		var score = Global.score.instantiate()
 		if $FrenzyTimer.time_left != 0:
 			Global.scores[loaded] += player.held * 150
+			score.t = "+" + str(player.held * 150)
+			score.g = true
 		else:
 			Global.scores[loaded] += player.held * 100
+			score.t = "+" + str(player.held * 100)
+		
+		score.position = Vector2((size.x / 2) - (score.size.x / 2), 100)
+		player.get_parent().add_child(score)
 		if fish_left <= Global.settings["weight"] - 1:
 			fish_left = 0
 			level += 1
@@ -200,6 +207,10 @@ func _on_player_power(type: Variant) -> void:
 							get_parent().get_child(i).sheilded = false
 		"bonus":
 			Global.scores[loaded] += 50
+			var score = Global.score.instantiate()
+			score.t = "+50"
+			score.position = player.position
+			player.get_parent().add_child(score)
 		"size":
 			player.scale = Vector2(2 , 2)
 		"frenzy":
@@ -211,16 +222,31 @@ func _on_player_power(type: Variant) -> void:
 			else:
 				Global.scores[loaded] -= 50
 				_on_player_damaged()
+				var score = Global.score.instantiate()
+				score.t = "-50"
+				score.g = false
+				score.position = player.position
+				player.get_parent().add_child(score)
 		"trash2":
 			if sheilded:
 				sheilded = false
 			else:
 				Global.scores[loaded] -= 50
 				_on_player_damaged()
+				var score = Global.score.instantiate()
+				score.t = "-50"
+				score.g = false
+				score.position = player.position
+				player.get_parent().add_child(score)
 
 
 func _on_player_damaged() -> void:
 	hp -= 1
+	var score = Global.score.instantiate()
+	score.t = "-1 HP"
+	score.g = false
+	score.position = player.position + Vector2(0 , 24)
+	player.get_parent().add_child(score)
 	if hp <= 0:
 		level = 0
 		fish_left = 0
@@ -231,5 +257,5 @@ func _on_player_damaged() -> void:
 		player.position.y = 10
 		hp = Global.settings["lives"]
 		create_fishes(true)
-		if Global.players > 3:
+		if Global.players < 3:
 			create_fishes(false)

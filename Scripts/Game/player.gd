@@ -22,6 +22,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if !frenzy:
 			if held < Global.settings["weight"]:
 				held += 1
+				var score = Global.score.instantiate()
+				score.t = "+1"
+				score.g = "b"
+				score.position = position
+				get_parent().add_child(score)
 				get_parent().get_parent().get_parent().fish_left -= 1
 				for i in get_parent().get_parent().get_parent().fishes.size():
 					if get_parent().get_parent().get_parent().fishes[i] == body:
@@ -32,8 +37,19 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 						get_parent().remove_child(i)
 						i.queue_free()
 						break
+			else:
+				var score = Global.score.instantiate()
+				score.t = "full"
+				score.g = "b"
+				score.position = position
+				get_parent().add_child(score)
 		else:
 			held += 1
+			var score = Global.score.instantiate()
+			score.t = "+1"
+			score.g = true
+			score.position = position
+			get_parent().add_child(score)
 			get_parent().get_parent().get_parent().fish_left -= 1 #subviewport -> container -> level
 			for i in get_parent().get_parent().get_parent().fishes.size():
 				if get_parent().get_parent().get_parent().fishes[i] == body:
@@ -47,6 +63,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.type == "bad":
 		if ! get_parent().get_parent().get_parent().sheilded:
 			Global.scores[plr] -= 250
+			var score = Global.score.instantiate()
+			score.t = "-250"
+			score.g = false
+			score.position = position
+			get_parent().add_child(score)
 		else:
 			get_parent().get_parent().get_parent().sheilded = false
 		for i in get_parent().get_parent().get_parent().fishes.size():
