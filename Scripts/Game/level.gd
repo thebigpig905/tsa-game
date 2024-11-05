@@ -89,7 +89,10 @@ func _process(delta: float) -> void:
 			score.t = "+" + str(player.held * 100)
 		
 		score.position = Vector2((size.x / 2) - (score.size.x / 2), 100)
-		player.get_parent().add_child(score)
+		if int(score.t) != 0:
+			player.get_parent().add_child(score)
+		else:
+			score.queue_free()
 		if fish_left <= Global.settings["weight"] - 1:
 			fish_left = 0
 			level += 1

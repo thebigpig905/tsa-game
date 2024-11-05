@@ -6,7 +6,6 @@
 offset_right = 40.0
 offset_bottom = 16.0
 theme_override_constants/outline_size = 4
-text = "+50"
 script = ExtResource("1_00bfm")
 
 [node name="Timer" type="Timer" parent="."]
