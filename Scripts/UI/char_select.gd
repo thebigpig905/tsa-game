@@ -1,60 +1,50 @@
 extends ColorRect
-signal close(node)
-signal add()
-var playerName: String = ""
-var team: int
-var isin: bool = false
-var editing: bool = false
-var colornum:int
-var plr:int
+signal close(node) #for removing player (node) is the player that is to be removed
+signal add() #for adding player
+var playerName: String = "" #name of player
+var isin: bool = false #for adding a player
+var editing: bool = false #for renaming i think
+var colornum:int #number that controlswhat color it is
+var plr:int #what player the card goes with
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	updateVis()
-	colornum = Global.col[plr]
+	updateVis() #updates layout/visibility
+	colornum = Global.col[plr] #sets the color
 	$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer/PlayerCol.color = Global.colors[Global.col[plr]]
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("clickL"):
-		if isin:
-			if playerName == "":
-				add.emit()
+	if Input.is_action_just_pressed("clickL"): #if click
+		if isin: #and isin
+			if playerName == "": #and the name is empty
+				add.emit() #add player
 
 func updateVis():
-	if playerName != "":
-		$MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.text = playerName
-		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.visible = true
-		$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer.visible = true
-		$MarginContainer/CenterContainer/VBoxContainer/Spacer.visible = true
-		$Remove.visible = true
-		$Rename.visible = true
+	if playerName != "": #if the name is not empty
+		$MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.text = playerName #set the name text to the name
+		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.visible = true#player icon should be visible
+		$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer.visible = true #color picker
+		$MarginContainer/CenterContainer/VBoxContainer/Spacer.visible = true #the spacer adds a space
+		$Remove.visible = true #the remove player button
+		$Rename.visible = true #the rename player button
 	else:
-		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.visible = false
+		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.visible = false #everyhting should be not visible
 		$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer.visible = false
 		$MarginContainer/CenterContainer/VBoxContainer/Spacer.visible = false
 		$Remove.visible = false
 		$Rename.visible = false
 
-
-
 func _on_mouse_entered() -> void:
 	isin = true
-
 
 func _on_mouse_exited() -> void:
 	isin = false
 
-
-
-
 func _on_remove_clicked() -> void:
 	close.emit(self)
 
-
 func _on_rename_clicked() -> void:
-	$MarginContainer/CenterContainer/LineEdit.visible = true
-	
-
+	$MarginContainer/CenterContainer/LineEdit.visible = true #on rename clicked, make the rename box visible
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	$MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.text = $MarginContainer/CenterContainer/LineEdit.text

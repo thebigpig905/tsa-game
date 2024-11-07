@@ -18,10 +18,6 @@ theme_override_constants/separation = 13
 layout_mode = 2
 text = "Power Ups"
 
-[node name="Label2" type="Label" parent="HBoxContainer/text"]
-layout_mode = 2
-text = "Teams"
-
 [node name="Label3" type="Label" parent="HBoxContainer/text"]
 layout_mode = 2
 text = "Level Length"
@@ -48,9 +44,6 @@ layout_mode = 2
 [node name="Powers" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 button_pressed = true
-
-[node name="Teams" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="Level Length" type="OptionButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -89,7 +82,6 @@ placeholder_text = "fish"
 expand_to_text_length = true
 
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Powers" to="." method="_on_powers_toggled"]
-[connection signal="toggled" from="HBoxContainer/VBoxContainer/Teams" to="." method="_on_teams_toggled"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/Level Length" to="." method="_on_level_length_item_selected"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/Rounds" to="." method="_on_rounds_text_changed"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/Max Lives" to="." method="_on_max_lives_text_changed"]

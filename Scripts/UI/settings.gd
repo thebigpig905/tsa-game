@@ -4,7 +4,6 @@ var inGame:bool = false
 
 func _ready() -> void:
 	$HBoxContainer/VBoxContainer/Powers.button_pressed = Global.settings["powerups"]
-	$HBoxContainer/VBoxContainer/Teams.button_pressed = Global.settings["teams"]
 	match Global.settings["length"]:
 		1:
 			$"HBoxContainer/VBoxContainer/Level Length".selected = 0
@@ -27,11 +26,6 @@ func _process(delta: float) -> void:
 
 func _on_powers_toggled(toggled_on: bool) -> void:
 	Global.settings["powerups"] = toggled_on
-
-
-func _on_teams_toggled(toggled_on: bool) -> void:
-	Global.settings["teams"] = toggled_on
-
 
 func _on_level_length_item_selected(index: int) -> void:
 	match index:

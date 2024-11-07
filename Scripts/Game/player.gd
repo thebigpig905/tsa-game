@@ -2,7 +2,6 @@ extends CharacterBody2D
 signal power(type)
 signal damaged
 var held: int = 0
-var specials
 var dir = Vector2(0 , 0)
 var ext =Vector2 (1 , 1)
 var speed = 150
