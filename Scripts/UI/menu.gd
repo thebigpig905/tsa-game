@@ -4,14 +4,14 @@ signal inputs
 var type: String
 #buttons that go with each menu type
 var buttons = {"main" : ["Play" , "Controls" , "Settings" , "Credits" , "Exit Game"] , 
-"inGame": ["Start" , "Back"] , 
+"inGame": ["Start" , "Settings" , "Back"] , 
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 
-"editControls": ["Switch Directions" , "Reel In Hook" , "Reset Controls" ,  "Back "] , 
-"settings": ["Reset" , "Back"] , 
+"editControls": ["Switch Directions" , "Reel In Hook" , "Reset Controls" ,  "Back"] , 
+"settings": ["Reset" , "Controls" , "Back"] , 
 "end": ["Main Menu"]}
 #what page was the menu first loaded on
-var prev: String
+var prev = []
 #idfk
 var pc: int = 4
 #block button inputs
@@ -23,7 +23,6 @@ var new: String
 func _ready() -> void:
 	size = Global.screen #resize
 	updateButtons() #read it
-	prev = type #sets the first load type
 	
 func _process(delta: float) -> void:
 	size = Global.screen #resize constantly
@@ -31,16 +30,17 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 	if !block: 
 		match btn: #runs logic for buttons on pressed
 			"Play":
+				prev.append(type)
 				type = "inGame" #sets the menu type so the buttons change when reloaded
 				addSelect(Global.players) #special line
 				updateButtons() #reloads menu
 			"Back":
-				type = prev
-				updateButtons()
-			"Back ":
-				type = "controls"
+				type = prev.pop_back()
+				if type == "inGame":
+					addSelect(Global.players)
 				updateButtons()
 			"Controls":
+				prev.append(type)
 				type = "controls"
 				updateButtons()
 			"Start":
@@ -55,18 +55,22 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				get_tree().reload_current_scene() #restarts the game
 			"Player 1":
 				pc = 0
+				prev.append(type)
 				type = "editControls"
 				updateButtons()
 			"Player 2":
 				pc = 1
+				prev.append(type)
 				type = "editControls"
 				updateButtons()
 			"Player 3":
 				pc = 2
+				prev.append(type)
 				type = "editControls"
 				updateButtons()
 			"Player 4":
 				pc = 3
+				prev.append(type)
 				type = "editControls"
 				updateButtons()
 			"Switch Directions":
@@ -90,6 +94,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 			"Exit Game":
 				get_tree().quit() #exits the game
 			"Settings":
+				prev.append(type)
 				type = "settings"
 				updateButtons()
 			"Reset":
@@ -100,6 +105,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				get_tree().reload_current_scene()
 			_:
 				print("could not find button: " , btn) #if button pressed does not appear in the above list, add it
+		print(prev)
 			
 func _on_close(node): #removes player from selection screen
 	if Global.players > 1:

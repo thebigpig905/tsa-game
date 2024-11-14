@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba71sdex7keju"]
+[gd_scene load_steps=2 format=3 uid="uid://c650oxgxnwqy7"]
 
 [ext_resource type="Script" path="res://Scripts/Game/score.gd" id="1_00bfm"]
 

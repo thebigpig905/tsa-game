@@ -13,11 +13,12 @@ func _ready() -> void:
 		add_theme_color_override("font_color" , Color.WHITE)
 	if g == null:
 		add_theme_color_override("font_color" , Color.LIME_GREEN)
+	position.x = clamp(position.x , 10 , Global.screen.x / Global.players - (size.x + 10))
 	$Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self_modulate = Color(1 , 1, 1 , $Timer.time_left)
+	self_modulate = Color(1 , 1 , 1 , $Timer.time_left)
 
 
 func _on_timer_timeout() -> void:
