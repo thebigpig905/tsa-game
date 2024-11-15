@@ -139,7 +139,7 @@ func create_fishes(remove):
 			var newFish = Global.item.instantiate()
 			newFish.type = "fish"
 			if Global.settings["powerups"] == true:
-				if randi_range(1 , 16) == 3:
+				if randi_range(1 , 16) == 1:
 					newFish.type = "power"
 					fish_left -= 1
 			newFish.position.x = randi_range(10 , lvlsize.x - 10)
@@ -168,10 +168,11 @@ func create_fishes(remove):
 			bad.append(i)
 	for i in clamp(level , 0 , Global.settings["length"] * 2):
 		var rand = randi_range(0 , bad.size() - 1)
-		if bad[rand].type != "bad":
-			bad[rand].type = "bad"
-			bad[rand].upds()
-			fish_left -= 1
+		if bad.size() > 0:
+			if bad[rand].type != "bad":
+				bad[rand].type = "bad"
+				bad[rand].upds()
+				fish_left -= 1
 	for i in fishes:
 		$SubViewportContainer/SubViewport.add_child(i)
 	for i in level:
