@@ -1,22 +1,30 @@
 extends CharacterBody2D
+#signals for powerup collecting and player hurt
 signal power(type)
 signal damaged
+
+#held fish
 var held: int = 0
+
+#movement vars
 var dir = Vector2(0 , 0)
 var ext =Vector2 (1 , 1)
 var speed = 150
 var size: Vector2 = Vector2(16 , 30)
+
+#important things
 var plr:int
-var p = 1
-var frenzy:bool = false
+var p = 1 #p is 0 when game is paused to stop movement
+var frenzy:bool = false #is frenzy active
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	velocity = dir * speed * ext * p
 	move_and_slide()
 
-
+#check for entering bodies
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if body fish
 	if body.type == "fish":
 		if !frenzy:
 			if held < Global.settings["weight"]:

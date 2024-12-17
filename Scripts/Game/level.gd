@@ -2,38 +2,46 @@ extends Control
 var loaded: int
 var lvlsize: Vector2
 var playing = false
+
+#important nodes
 @onready var player = $SubViewportContainer/SubViewport/Player
 @onready var ptimer = $SubViewportContainer/SubViewport/Player/Timer
 @onready var background = $SubViewportContainer/SubViewport/Background
 @onready var cam: Camera2D = $SubViewportContainer/SubViewport/Camera2D
+
+#walls
 @onready var left: StaticBody2D = $SubViewportContainer/SubViewport/Left
 @onready var right: StaticBody2D = $SubViewportContainer/SubViewport/Right
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
-var prev:Vector2 = Vector2(1 , 1)
+
+#game info
+var prev:Vector2 = Vector2(1 , 1) #previous player velocity for switching directions easier
 var level:int = 0
 var fish_left:int = 0
 
-var len = 1000
-var maxY:int
+var len = 1000 #level length 
+var maxY:int #level base
 
-var fishes = []
-var sheilded:bool = false
-var hp:int
+var fishes = [] #stores the fishes in here for updating
+var sheilded:bool = false #if sheild power is active
+var hp:int #player health
 
-
+#runs on scene load
 func _ready() -> void:
-	player.plr = loaded
-	hp = Global.settings["lives"]
-	background.color = Color.TEAL
-	background.size.x = size.x
+	player.plr = loaded #sets the players player number to the load order :if this level was loaded first, that is player 1
+	hp = Global.settings["lives"] #sets player hp to the global setting
+	background.color = Color.TEAL #background color
+	background.size.x = size.x #resizes the background to fit the screen
 	background.size.y = len + (len * ((Global.settings["length"] - 1) / 2.0)) #base length + half of length level
-	maxY = background.size.y
-	lvlsize = size
-	player.position.x = size.x / 2
-	$SubViewportContainer.size = lvlsize
+	maxY = background.size.y #sets the bottom
+	lvlsize = size #idk why this is here
+	player.position.x = size.x / 2 #sets the player to be in the center of the level
+	$SubViewportContainer.size = lvlsize #sets the player view size to match the level size
 	$SubViewportContainer/SubViewport.size = lvlsize
-	cam.position.x = $SubViewportContainer.size.x / 2
+	cam.position.x = $SubViewportContainer.size.x / 2 #centers the camera
+	
+	#resize and set wall positions
 	left.scale.y = maxY / 5
 	left.position.x = 2
 	left.position.y = (maxY / 2) - 150
@@ -46,10 +54,14 @@ func _ready() -> void:
 	bottom.scale.x = lvlsize.x / 10
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
+	
+	#generate the fishes
 	create_fishes(true)
-	if Global.players < 3:
+	if Global.players < 3: #if there are less than 3 players, make it a bit harder
 		level = 1
 		create_fishes(false)
+		
+	#start game on timer end
 	await get_parent().get_child(0).timeout
 	playing = true
 	player.dir = Vector2(1 , 1)
@@ -57,7 +69,8 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	$sheild.visible = sheilded
+	$sheild.visible = sheilded #if shield is active, show the icon
+	#pause fish and player on game pause
 	if get_parent().paused == true:
 		player.p = 0
 		for i in fishes:
@@ -66,6 +79,7 @@ func _process(delta: float) -> void:
 		player.p = 1
 		for i in fishes:
 			i.p = 1
+	#update camera and check player collision with walls
 	cam.position.y = player.position.y
 	if player.position.x >= lvlsize.x - (player.size.x / 2) - 2:
 		player.dir.x = -1
@@ -75,6 +89,7 @@ func _process(delta: float) -> void:
 		if player.dir.y == 2:
 			player.dir.x = prev.x
 		player.dir.y = -1
+	#when th eplayer reaches the top, reset its stats and collect the fish for scoring
 	if player.position.y <= 0 + (player.size.y / 2):
 		player.ext = Vector2(1 , 1)
 		player.scale = Vector2(1 , 1)
@@ -103,21 +118,21 @@ func _process(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if playing:
-		if event.as_text() == Global.switch[loaded]:
+	if playing: #only run if game is not paused
+		if event.as_text() == Global.switch[loaded]: #if the button matches the keybind for the switch control
 			if event.is_pressed() == true:
 				if event.is_echo() == false:
 					if ptimer.time_left == 0:
-						player.dir *= Vector2(-1 , 1)
-						prev = player.dir
-						ptimer.start()
+						player.dir *= Vector2(-1 , 1) #switch direction
+						prev = player.dir #update prev
+						ptimer.start() #start timer for detecting double clicks
 					else:
-						if player.dir.y > 0:
+						if player.dir.y > 0: #if double click speed downwards
 							player.dir = Vector2(0 , 2)
 			else:
 				if player.dir == Vector2(0 , 2):
-					player.dir = prev
-		if event.as_text() == Global.use[loaded]:
+					player.dir = prev #if key up and you were speeding down, reset dir to prev
+		if event.as_text() == Global.use[loaded]: #if reel button is used, reel in if fish held > 0
 			if event.is_pressed() == true:
 				if event.is_echo() == false:
 					if player.held > 0:
@@ -125,25 +140,30 @@ func _input(event: InputEvent) -> void:
 							player.dir.x = prev.x
 						player.dir.y = -1
 
+#creates fishes. if remove is true, remove previous fish first
 func create_fishes(remove):
 	var skip = false
+	#if remove, clear all fish
 	if remove:
 		for i in $SubViewportContainer/SubViewport.get_children():
 			if i.has_method("fish"):
 				$SubViewportContainer/SubViewport.remove_child(i)
 				i.queue_free()
 		fishes.clear()
-	for i in (maxY - 200) / 100:
-		if randi_range(0 , 3) > 0:
+	for i in (maxY - 200) / 100: #adds fish spaced out along entire level length - top portion
+		if randi_range(0 , 3) > 0: #1/4 chance to not add fish
 			fish_left += 1
 			var newFish = Global.item.instantiate()
 			newFish.type = "fish"
 			if Global.settings["powerups"] == true:
-				if randi_range(1 , 16) == 1:
+				if randi_range(1 , 16) == 1: #1 in 16 chance to be a powerup instead of fish
 					newFish.type = "power"
 					fish_left -= 1
+			#randomize new fish position
 			newFish.position.x = randi_range(10 , lvlsize.x - 10)
 			newFish.position.y = (100 * i) + 200
+			
+			#clear any fishes that are too close to eachother on the same y level to prevent weird collision bugs
 			for k in fishes:
 				if k.position.y == newFish.position.y:
 					if abs(k.position.x - newFish.position.x) < 50:
@@ -162,10 +182,12 @@ func create_fishes(remove):
 					skip = false
 			else:
 				fishes.append(newFish)
+	#add the bad guy fishes
 	var bad = []
 	for i in fishes:
 		if i.type == "fish":
 			bad.append(i)
+	#randomly turn some fishes into evil fishes, but not too many
 	for i in clamp(level , 0 , Global.settings["length"] * 2):
 		var rand = randi_range(0 , bad.size() - 1)
 		if bad.size() > 0:
@@ -173,8 +195,10 @@ func create_fishes(remove):
 				bad[rand].type = "bad"
 				bad[rand].upds()
 				fish_left -= 1
+	#add fishes into the game
 	for i in fishes:
 		$SubViewportContainer/SubViewport.add_child(i)
+	#add in the (obs)tacles based on current level
 	for i in level:
 		var obs = Global.obs.instantiate()
 		obs.position.x = Global.screen.x / Global.players * randi_range(0 , 1)
@@ -185,20 +209,24 @@ func create_fishes(remove):
 		obs.position.y = randi_range(100 , maxY)
 		$SubViewportContainer/SubViewport.add_child(obs)
 
-
+#handles powerup collection, type is the powerup name
 func _on_player_power(type: Variant) -> void:
 	match type:
 		"sheild":
+			#activate the shield
 			sheilded = true
 		"pslow":
+			#gets all other active levels and slows the player speed
 			for i in get_parent().get_child_count():
 				if get_parent().get_child(i).has_method("_on_player_power"):
 					if get_parent().get_child(i) != self:
+						#remove shield if sheilded, otherwise run the effect
 						if get_parent().get_child(i).sheilded == false:
 							get_parent().get_child(i).player.ext = Vector2(0.5 , 1)
 						else:
 							get_parent().get_child(i).sheilded = false
 		"pfast":
+			#gets all fish in other levels and makes them fast
 			for i in get_parent().get_child_count():
 				if get_parent().get_child(i).has_method("_on_player_power"):
 					if get_parent().get_child(i) != self:
@@ -210,17 +238,21 @@ func _on_player_power(type: Variant) -> void:
 						else:
 							get_parent().get_child(i).sheilded = false
 		"bonus":
+			#bonus points yay
 			Global.scores[loaded] += 50
 			var score = Global.score.instantiate()
 			score.t = "+50"
 			score.position = player.position
 			player.get_parent().add_child(score)
 		"size":
+			#makes the player bigger
 			player.scale = Vector2(2 , 2)
 		"frenzy":
+			#start the frenzy timer
 			$FrenzyTimer.start()
 			player.frenzy = true
 		"trash1":
+			#trash -points -hp
 			if sheilded:
 				sheilded = false
 			else:
@@ -232,6 +264,7 @@ func _on_player_power(type: Variant) -> void:
 				score.position = player.position
 				player.get_parent().add_child(score)
 		"trash2":
+			#same as trash1
 			if sheilded:
 				sheilded = false
 			else:

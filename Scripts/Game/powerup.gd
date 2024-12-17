@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-var type:String
+var type:String #type of object. fish bad or powerup
+
+#texture names
 const FISHES = ["blueFish" , "greenFish" , "orangeFish" , "purpleFish" , "redFish" , "yellowFish"]
 var powers = ["sheild" , "pslow" , "pfast" , "bonus" , "size" , "frenzy" , "trash1" , "trash2"]
+#velocity
 var dir:Vector2 = Vector2(0 , 0)
 var speed = 50
 var p = 1
@@ -10,13 +13,14 @@ var num:int
 
 func _ready() -> void:
 	num = randi_range(0 , powers.size() - 1)
+	#if fish set random direction and fish texture
 	if type == "fish":
 		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , FISHES.size() - 1)]]
 		if randi_range(1 , 2) == 1:
 			dir = Vector2(1 , 0)
 		else:
 			dir = Vector2(-1 , 0)
-	
+	#if powerup set random power
 	if type == "power":
 		$Sprite2D.texture = Global.textures[powers[num]]
 		if powers[num] != "size":
@@ -36,7 +40,7 @@ func _ready() -> void:
 			dir = Vector2(1 , 0)
 		else:
 			dir = Vector2(-1 , 0)
-		
+#update position and direction
 func _physics_process(delta: float) -> void:
 	velocity = speed * dir * p
 	move_and_slide()
@@ -48,6 +52,6 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = false
 		
 func fish(): #THIS IS NOT USELESS DO NOT DELETE
-	pass
-func upds():
+	pass #this labels the node as a fish so that it can be deleted by other scripts
+func upds():#redo the ready function if this needs to be reloaded for some reason
 	_ready()

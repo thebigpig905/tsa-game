@@ -2,7 +2,7 @@ extends ColorRect
 signal clicked()
 var isin: bool = false
 
-
+#stop making more
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("clickL"):
 		if isin:
