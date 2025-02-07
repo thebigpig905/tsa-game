@@ -3,7 +3,7 @@ signal inputs
 #what menu to load
 var type: String
 #buttons that go with each menu type
-var buttons = {"main" : ["Play" , "Controls" , "Settings" , "Credits" , "Exit Game"] , 
+var buttons = {"main" : ["Play" , "Settings" , "Credits" , "Exit Game"] , 
 "inGame": ["Start" , "Settings" , "Back"] , 
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 
@@ -44,6 +44,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				type = "controls"
 				updateButtons()
 			"Start":
+				get_parent().mmus.stop()
 				get_parent().add_child(Global.game.instantiate()) #starts the main game
 				get_parent().remove_child(self) #removes self
 				queue_free()
@@ -142,6 +143,7 @@ func updateButtons():
 			i.queue_free()
 	if type == "settings":
 		var menu = Global.setting.instantiate() #if you are loading the settings page, add the settings scene
+		
 		$ButtonHolder.add_child(menu)
 	for i in buttons[type].size(): #runs through the array of button names in the dictionary with the keythat is the type of menu loaded
 		var newbtn = Global.menuBtnScn.instantiate()

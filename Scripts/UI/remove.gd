@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 signal clicked()
 var isin: bool = false
 #just another button script, why did i not just use one

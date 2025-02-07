@@ -1,4 +1,4 @@
-extends ColorRect
+extends NinePatchRect
 signal clicked(button)
 var btnName: String
 var isin: bool = false
@@ -15,6 +15,7 @@ func _ready() -> void:
 		$Label.add_theme_font_size_override("font_size" , 16)
 	if $Label.text == "Next Round":
 		$Label.add_theme_font_size_override("font_size" , 32)
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("clickL"): #if left clicked while in the button area emit the clicked signal
 		if isin:
@@ -24,6 +25,7 @@ func _process(delta: float) -> void:
 
 func _on_mouse_entered() -> void:
 	isin = true #sets isin when mouse enters
+
 
 
 func _on_mouse_exited() -> void:

@@ -40,24 +40,28 @@ var settingsDef = {"rounds": 1 , "powerups": true , "lives": 5 , "timer": 180 , 
 var screen:Vector2 = DisplayServer.window_get_size()
 
 #preload textures
-const BLUE_FISH = preload("res://Assets/Placeholders/blueFish.png")
-const GREEN_FISH = preload("res://Assets/Placeholders/greenFish.png")
+const BLUE_FISH = preload("res://Assets/Textures/fish blue0.png")
+const GREEN_FISH = preload("res://Assets/Textures/fish green0.png")
 const HOOK = preload("res://Assets/Placeholders/hook.png")
-const ORANGE_FISH = preload("res://Assets/Placeholders/orangeFish.png")
-const PURPLE_FISH = preload("res://Assets/Placeholders/purpleFish.png")
-const RED_FISH = preload("res://Assets/Placeholders/redFish.png")
+const ORANGE_FISH = preload("res://Assets/Textures/fish nemo0.png")
+const PURPLE_FISH = preload("res://Assets/Textures/fish purple0.png")
+const RED_FISH = preload("res://Assets/Textures/fish red0.png")
 const YELLOW_FISH = preload("res://Assets/Placeholders/yellowFish.png")
 
-const PUFFERFISH = preload("res://Assets/Placeholders/pufferfish.png")
+const PUFFERFISH = preload("res://Assets/Textures/puffer fish0.png")
+const JELLYFISH = preload("res://Assets/Textures/jellyfish0.png")
 
 const BIG_HOOK = preload("res://Assets/Placeholders/bigHook.png")
-const BONUS = preload("res://Assets/Placeholders/bonus.png")
-const FRENZY = preload("res://Assets/Placeholders/frenzy.png")
-const SHEILD = preload("res://Assets/Placeholders/sheild.png")
-const SLOWHOOK = preload("res://Assets/Placeholders/slowhook.png")
-const SPEEDFISH = preload("res://Assets/Placeholders/speedfish.png")
-const TRASH_1 = preload("res://Assets/Placeholders/trash1.png")
+const BONUS = preload("res://Assets/Textures/fish golden0.png")
+const FRENZY = preload("res://Assets/Textures/fishing frenzy0.png")
+const SHEILD = preload("res://Assets/Textures/shield0.png")
+const SLOWHOOK = preload("res://Assets/Textures/slow down0.png")
+const SPEEDFISH = preload("res://Assets/Textures/speed up0.png")
+const TRASH_1 = preload("res://Assets/Textures/rusty can obstacle0.png")
 const TRASH_2 = preload("res://Assets/Placeholders/trash2.png")
+
+const CORAL = preload("res://Assets/Textures/coral obstacle0.png")
+const CRATE = preload("res://Assets/Textures/crate obstacle0.png")
 
 #one dictionary to access the textures easier
 var textures = {"blueFish":BLUE_FISH , "greenFish":GREEN_FISH , "orangeFish": ORANGE_FISH , "purpleFish":PURPLE_FISH , 

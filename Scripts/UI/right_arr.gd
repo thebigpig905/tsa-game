@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 signal clicked()
 var isin: bool = false
 

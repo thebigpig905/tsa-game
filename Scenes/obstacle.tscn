@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://d26m5o2o5fytk"]
+[gd_scene load_steps=4 format=3 uid="uid://cjfqbowpkruwu"]
 
-[ext_resource type="Texture2D" uid="uid://cna5xt1ouy52k" path="res://Assets/Placeholders/wall.png" id="1_paeu3"]
+[ext_resource type="Texture2D" uid="uid://44ukpfy3gnaj" path="res://Assets/Textures/crate obstacle0.png" id="1_ccefr"]
 [ext_resource type="Script" path="res://Scripts/Game/obstacle.gd" id="2_yg5dm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yg4r"]
-size = Vector2(16, 16)
+size = Vector2(26, 25)
 
 [node name="Obstacle" type="Sprite2D"]
 position = Vector2(21, 21)
-scale = Vector2(2.625, 2.625)
-texture = ExtResource("1_paeu3")
+texture = ExtResource("1_ccefr")
 script = ExtResource("2_yg5dm")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_2yg4r")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

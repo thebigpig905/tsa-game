@@ -1,5 +1,8 @@
 extends Node2D
 
+#musics
+@onready var mmus: AudioStreamPlayer = $AudioStreamPlayer
+
 func _ready() -> void:
 	var mm = Global.menu.instantiate() #instantiates a menu on game start
 	mm.type = "main"

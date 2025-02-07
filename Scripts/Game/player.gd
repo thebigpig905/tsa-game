@@ -75,6 +75,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			score.g = false
 			score.position = position
 			get_parent().add_child(score)
+			$"../../../border".visible = true
+			$"../../../borderTime".start()
 		else:
 			get_parent().get_parent().get_parent().sheilded = false
 		for i in get_parent().get_parent().get_parent().fishes.size():

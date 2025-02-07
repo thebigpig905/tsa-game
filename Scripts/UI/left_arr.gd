@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 
 #signal for clicking
 signal clicked()

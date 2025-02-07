@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdhr0jkcfalc3"]
+[gd_scene load_steps=7 format=3 uid="uid://bdhr0jkcfalc3"]
 
 [ext_resource type="Script" path="res://Scripts/Game/level.gd" id="1_ngj87"]
 [ext_resource type="PackedScene" uid="uid://vl27g7nuolo1" path="res://Scenes/player.tscn" id="2_6ku75"]
 [ext_resource type="Texture2D" uid="uid://cna5xt1ouy52k" path="res://Assets/Placeholders/wall.png" id="3_a6txe"]
-[ext_resource type="Texture2D" uid="uid://u5ha568t88up" path="res://Assets/Placeholders/sheild.png" id="4_myn7e"]
+[ext_resource type="Texture2D" uid="uid://c6q8fk0qrjise" path="res://Assets/Textures/gradient.png" id="3_fkl27"]
+[ext_resource type="Texture2D" uid="uid://c5opcqbticla7" path="res://Assets/Textures/shield0.png" id="4_uqv5y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjv0f"]
 size = Vector2(8.5, 9)
@@ -76,8 +77,27 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Bottom"]
 shape = SubResource("RectangleShape2D_cjv0f")
 
+[node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport"]
+points = PackedVector2Array(219, 34, 126, 288)
+width = 3.0
+
+[node name="border" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("3_fkl27")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
 [node name="FrenzyTimer" type="Timer" parent="."]
 wait_time = 30.0
+one_shot = true
+
+[node name="borderTime" type="Timer" parent="."]
 one_shot = true
 
 [node name="sheild" type="TextureRect" parent="."]
@@ -87,8 +107,9 @@ offset_left = 12.0
 offset_top = 1.0
 offset_right = 76.0
 offset_bottom = 65.0
-texture = ExtResource("4_myn7e")
+texture = ExtResource("4_uqv5y")
 
 [connection signal="damaged" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_damaged"]
 [connection signal="power" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_power"]
+[connection signal="timeout" from="FrenzyTimer" to="." method="_on_frenzy_timer_timeout"]
 [connection signal="timeout" from="FrenzyTimer" to="SubViewportContainer/SubViewport/Player" method="_on_frenzy_timer_timeout"]

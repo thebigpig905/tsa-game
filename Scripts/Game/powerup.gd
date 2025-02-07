@@ -16,6 +16,7 @@ func _ready() -> void:
 	#if fish set random direction and fish texture
 	if type == "fish":
 		$Sprite2D.texture = Global.textures[FISHES[randi_range(0 , FISHES.size() - 1)]]
+		speed += get_parent().get_parent().get_parent().level * randi_range(15 , 45)
 		if randi_range(1 , 2) == 1:
 			dir = Vector2(1 , 0)
 		else:
@@ -25,6 +26,8 @@ func _ready() -> void:
 		$Sprite2D.texture = Global.textures[powers[num]]
 		if powers[num] != "size":
 			scale = Vector2(1.5 , 1.5)
+		if powers[num] == "bonus":
+			dir = Vector2(1 , 0)
 		if int(powers[num]) != 0:
 			speed = 25
 			if randi_range(1 , 2) == 1:
@@ -34,7 +37,10 @@ func _ready() -> void:
 	
 	if type == "bad":
 		speed = 100
-		$Sprite2D.texture = Global.PUFFERFISH
+		if randi_range(1 , 2) == 2:
+			$Sprite2D.texture = Global.PUFFERFISH
+		else:
+			$Sprite2D.texture = Global.JELLYFISH
 		scale = Vector2(1.5 , 1.5)
 		if randi_range(1 , 2) == 1:
 			dir = Vector2(1 , 0)

@@ -12,6 +12,7 @@ func _ready() -> void:
 	if type == "total":
 		$HBoxContainer/ScoreBG/HBoxContainer/MarginContainer/Score.text = "Total Score: " + str(Global.total[plr])
 	$HBoxContainer/ScoreBG/HBoxContainer/Place.text ="#" + str(loaded + 1)
+	#set text color based on place
 	match loaded:
 		0:
 			$HBoxContainer/ScoreBG/HBoxContainer/Place.add_theme_color_override("font_color" , Color.GOLD)

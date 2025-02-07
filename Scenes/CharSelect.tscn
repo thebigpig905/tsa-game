@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgpoh447rrxmu"]
+[gd_scene load_steps=12 format=3 uid="uid://cgpoh447rrxmu"]
 
 [ext_resource type="Script" path="res://Scripts/UI/char_select.gd" id="1_fp38c"]
+[ext_resource type="Texture2D" uid="uid://t4e67bfrenj0" path="res://Assets/Textures/main background0.png" id="1_gbe1r"]
 [ext_resource type="Script" path="res://Scripts/UI/left_arr.gd" id="2_4660l"]
 [ext_resource type="Script" path="res://Scripts/UI/remove.gd" id="2_f7as4"]
 [ext_resource type="PackedScene" uid="uid://ci1buhwjb03xx" path="res://Scenes/line_edit.tscn" id="2_jxkit"]
 [ext_resource type="Script" path="res://Scripts/UI/right_arr.gd" id="3_bgaiw"]
 [ext_resource type="Script" path="res://Scripts/UI/rename.gd" id="3_fyfcf"]
+[ext_resource type="Texture2D" uid="uid://bgfk86s6ts6be" path="res://Assets/Textures/left arrow0.png" id="3_knohm"]
+[ext_resource type="Texture2D" uid="uid://clw35063mfwi7" path="res://Assets/Textures/right arrow0.png" id="5_qgm6f"]
+[ext_resource type="Texture2D" uid="uid://b5oml0kyfuu3j" path="res://Assets/Textures/delet player button0.png" id="8_8ep8m"]
+[ext_resource type="Texture2D" uid="uid://s7o0ryus3am8" path="res://Assets/Textures/rename0.png" id="10_m7ei8"]
 
-[node name="SelectBackground" type="ColorRect"]
+[node name="SelectBackground" type="TextureRect"]
 custom_minimum_size = Vector2(250, 350)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.61339, 0.61339, 0.61339, 1)
+offset_right = 250.0
+offset_bottom = 350.0
+texture = ExtResource("1_gbe1r")
 script = ExtResource("1_fp38c")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -43,18 +48,20 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="LeftArr" type="ColorRect" parent="MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer"]
+[node name="LeftArr" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+texture = ExtResource("3_knohm")
 script = ExtResource("2_4660l")
 
 [node name="PlayerCol" type="ColorRect" parent="MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer"]
 custom_minimum_size = Vector2(107, 0)
 layout_mode = 2
 
-[node name="RightArr" type="ColorRect" parent="MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer"]
+[node name="RightArr" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+texture = ExtResource("5_qgm6f")
 script = ExtResource("3_bgaiw")
 
 [node name="Spacer" type="ColorRect" parent="MarginContainer/CenterContainer/VBoxContainer"]
@@ -81,22 +88,23 @@ visible = false
 layout_mode = 2
 caret_blink = true
 
-[node name="Remove" type="ColorRect" parent="."]
+[node name="Remove" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 0
-offset_left = 226.0
-offset_top = 4.0
-offset_right = 246.0
-offset_bottom = 24.0
-color = Color(0.74902, 0, 0, 1)
+offset_left = 222.0
+offset_top = 5.0
+offset_right = 245.0
+offset_bottom = 28.0
+texture = ExtResource("8_8ep8m")
 script = ExtResource("2_f7as4")
 
-[node name="Rename" type="ColorRect" parent="."]
+[node name="Rename" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 202.0
-offset_top = 272.0
+offset_top = 303.0
 offset_right = 222.0
-offset_bottom = 292.0
+offset_bottom = 323.0
+texture = ExtResource("10_m7ei8")
 script = ExtResource("3_fyfcf")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

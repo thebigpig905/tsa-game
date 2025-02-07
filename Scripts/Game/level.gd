@@ -2,7 +2,6 @@ extends Control
 var loaded: int
 var lvlsize: Vector2
 var playing = false
-
 #important nodes
 @onready var player = $SubViewportContainer/SubViewport/Player
 @onready var ptimer = $SubViewportContainer/SubViewport/Player/Timer
@@ -14,6 +13,8 @@ var playing = false
 @onready var right: StaticBody2D = $SubViewportContainer/SubViewport/Right
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
+
+@onready var line: Line2D = $SubViewportContainer/SubViewport/Line2D
 
 #game info
 var prev:Vector2 = Vector2(1 , 1) #previous player velocity for switching directions easier
@@ -29,6 +30,7 @@ var hp:int #player health
 
 #runs on scene load
 func _ready() -> void:
+	
 	player.plr = loaded #sets the players player number to the load order :if this level was loaded first, that is player 1
 	hp = Global.settings["lives"] #sets player hp to the global setting
 	background.color = Color.TEAL #background color
@@ -40,6 +42,7 @@ func _ready() -> void:
 	$SubViewportContainer.size = lvlsize #sets the player view size to match the level size
 	$SubViewportContainer/SubViewport.size = lvlsize
 	cam.position.x = $SubViewportContainer.size.x / 2 #centers the camera
+	$border.size = lvlsize - Vector2(16 , 0)
 	
 	#resize and set wall positions
 	left.scale.y = maxY / 5
@@ -55,6 +58,8 @@ func _ready() -> void:
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
 	
+	#set the fishing line
+	line.points[0] = Vector2(lvlsize.x / 2 , -500)
 	#generate the fishes
 	create_fishes(true)
 	if Global.players < 3: #if there are less than 3 players, make it a bit harder
@@ -69,6 +74,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	line.points[1] = player.position - Vector2(2 , 14)
 	$sheild.visible = sheilded #if shield is active, show the icon
 	#pause fish and player on game pause
 	if get_parent().paused == true:
@@ -115,6 +121,10 @@ func _process(delta: float) -> void:
 			if Global.players < 3:
 				create_fishes(false)
 		player.held = 0
+	#border control when hurt
+	if $borderTime.time_left != 0:
+		if $FrenzyTimer.time_left == 0:
+			$border.self_modulate = Color(1 , 0 , 0 , $borderTime.time_left)
 	
 
 func _input(event: InputEvent) -> void:
@@ -156,7 +166,7 @@ func create_fishes(remove):
 			var newFish = Global.item.instantiate()
 			newFish.type = "fish"
 			if Global.settings["powerups"] == true:
-				if randi_range(1 , 16) == 1: #1 in 16 chance to be a powerup instead of fish
+				if randi_range(1 , 8) == 1: #1 in 16 chance to be a powerup instead of fish
 					newFish.type = "power"
 					fish_left -= 1
 			#randomize new fish position
@@ -239,9 +249,10 @@ func _on_player_power(type: Variant) -> void:
 							get_parent().get_child(i).sheilded = false
 		"bonus":
 			#bonus points yay
-			Global.scores[loaded] += 50
+			Global.scores[loaded] += 150
 			var score = Global.score.instantiate()
-			score.t = "+50"
+			score.t = "+150"
+			player.held += 1
 			score.position = player.position
 			player.get_parent().add_child(score)
 		"size":
@@ -251,6 +262,9 @@ func _on_player_power(type: Variant) -> void:
 			#start the frenzy timer
 			$FrenzyTimer.start()
 			player.frenzy = true
+			#set border
+			$border.visible = true
+			$border.self_modulate = Color.GOLD
 		"trash1":
 			#trash -points -hp
 			if sheilded:
@@ -278,6 +292,8 @@ func _on_player_power(type: Variant) -> void:
 
 
 func _on_player_damaged() -> void:
+	$border.visible = true
+	$borderTime.start()
 	hp -= 1
 	var score = Global.score.instantiate()
 	score.t = "-1 HP"
@@ -296,3 +312,8 @@ func _on_player_damaged() -> void:
 		create_fishes(true)
 		if Global.players < 3:
 			create_fishes(false)
+
+
+func _on_frenzy_timer_timeout() -> void:
+	#clear the border
+	$border.visible = false

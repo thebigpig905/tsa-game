@@ -49,6 +49,7 @@ func update(li):
 	for i in $VBoxContainer.get_children():
 		$VBoxContainer.remove_child(i)
 		i.queue_free()
+	#sort players
 	for i in Global.players: #runs once for each player
 		if i == 0: #if its the first time through just append it
 			sort.append(li[i])

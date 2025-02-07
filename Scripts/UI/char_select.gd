@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 signal close(node) #for removing player (node) is the player that is to be removed
 signal add() #for adding player
 var playerName: String = "" #name of player
@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 		if isin: #and isin
 			if playerName == "": #and the name is empty
 				add.emit() #add player
+	$Rename.position.x = $MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.position.x
 
 func updateVis():
 	if playerName != "": #if the name is not empty
