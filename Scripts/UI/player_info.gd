@@ -58,8 +58,9 @@ func update():
 		var fish = TextureRect.new()
 		fish.texture = i
 		fishdisp.add_child(fish)
-	##fix separation
-	#fishdisp.add_theme_constant_override("separation" , ((Global.screen.x / Global.players) - clamp(get_parent().get_parent().get_parent().levels[plr].player.held , 5 , INF)) / (clamp(get_parent().get_parent().get_parent().levels[plr].player.held , 5 , INF) - 1))
+	#fix separation so size stays good
+	fishdisp.add_theme_constant_override("separation" , clamp((((Global.screen.x / Global.players) - 20) - (32 * clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF))) / (clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF)-1) , -INF , 4))
+	#
 func _on_clear():
 	fishes.clear()
 	for i in Global.settings["weight"]:
