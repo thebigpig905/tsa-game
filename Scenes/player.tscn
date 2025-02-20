@@ -10,6 +10,7 @@ radius = 11.7047
 radius = 19.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_8lnu7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtq6sigl4ts3p"
-path="res://.godot/imported/puffer fish0.png-89eb90a7fe41ef158e5262608b5b0c73.ctex"
+uid="uid://daahfk0pf8mug"
+path="res://.godot/imported/sprite_0.png-9bda264d32321eb4577583ebcb1ece0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/puffer fish0.png"
-dest_files=["res://.godot/imported/puffer fish0.png-89eb90a7fe41ef158e5262608b5b0c73.ctex"]
+source_file="res://Assets/Textures/sprite_0.png"
+dest_files=["res://.godot/imported/sprite_0.png-9bda264d32321eb4577583ebcb1ece0d.ctex"]
 
 [params]
 

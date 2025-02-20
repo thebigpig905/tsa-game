@@ -54,12 +54,14 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("esc"):
 			if paused:
 				paused = false
+				$End.paused = false
 				if get_child(-1).name == "Menu":
 					var remove = get_child(-1)
 					remove_child(remove)
 					remove.queue_free()
 			else:
 				paused = true
+				$End.paused = true
 				var menu = Global.menu.instantiate()
 				menu.type = "playing"
 				add_child(menu)

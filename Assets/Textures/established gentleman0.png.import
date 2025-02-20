@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmvy43amo1xnu"
-path="res://.godot/imported/player icon background0 (2).png-e359cf7bbb076c4ff3f3113da642433e.ctex"
+uid="uid://bhil3xevx22ah"
+path="res://.godot/imported/established gentleman0.png-9a57e33a554d1d186703565eb5811347.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/player icon background0 (2).png"
-dest_files=["res://.godot/imported/player icon background0 (2).png-e359cf7bbb076c4ff3f3113da642433e.ctex"]
+source_file="res://Assets/Textures/established gentleman0.png"
+dest_files=["res://.godot/imported/established gentleman0.png-9a57e33a554d1d186703565eb5811347.ctex"]
 
 [params]
 

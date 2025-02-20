@@ -28,6 +28,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.type == "fish":
 		if !frenzy:
 			if held < Global.settings["weight"]:
+				get_parent().get_parent().get_parent().caught.emit(body.get_child(0).texture)
 				held += 1
 				var score = Global.score.instantiate()
 				score.t = "+1"
@@ -51,6 +52,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				score.position = position
 				get_parent().add_child(score)
 		else:
+			get_parent().get_parent().get_parent().caught.emit(body.get_child(0).texture)
 			held += 1
 			var score = Global.score.instantiate()
 			score.t = "+1"
@@ -90,17 +92,31 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				break
 			
 	if body.type == "power":
-		power.emit(body.powers[body.num])
-				
-		for i in get_parent().get_parent().get_parent().fishes.size():
-			if get_parent().get_parent().get_parent().fishes[i] == body:
-				get_parent().get_parent().get_parent().fishes.remove_at(i)
-				break
-		for i in get_parent().get_children():
-			if i == body:
-				get_parent().remove_child(i)
-				i.queue_free()
-				break
+		if body.num != 3:
+			power.emit(body.powers[body.num])
+					
+			for i in get_parent().get_parent().get_parent().fishes.size():
+				if get_parent().get_parent().get_parent().fishes[i] == body:
+					get_parent().get_parent().get_parent().fishes.remove_at(i)
+					break
+			for i in get_parent().get_children():
+				if i == body:
+					get_parent().remove_child(i)
+					i.queue_free()
+					break
+		else:
+			if (held < Global.settings["weight"]) or frenzy:
+				power.emit(body.powers[body.num])
+					
+				for i in get_parent().get_parent().get_parent().fishes.size():
+					if get_parent().get_parent().get_parent().fishes[i] == body:
+						get_parent().get_parent().get_parent().fishes.remove_at(i)
+						break
+				for i in get_parent().get_children():
+					if i == body:
+						get_parent().remove_child(i)
+						i.queue_free()
+						break
 
 
 func _on_frenzy_timer_timeout() -> void:

@@ -44,6 +44,7 @@ one_shot = true
 limit_top = 0
 
 [node name="Left" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+z_index = 2
 collision_layer = 2
 collision_mask = 2
 
@@ -54,6 +55,7 @@ shape = SubResource("RectangleShape2D_cjv0f")
 texture = ExtResource("3_a6txe")
 
 [node name="Right" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+z_index = 2
 collision_layer = 2
 collision_mask = 2
 
@@ -64,6 +66,7 @@ shape = SubResource("RectangleShape2D_cjv0f")
 texture = ExtResource("3_a6txe")
 
 [node name="Top" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+z_index = 2
 collision_layer = 2
 collision_mask = 2
 
@@ -71,6 +74,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_cjv0f")
 
 [node name="Bottom" type="StaticBody2D" parent="SubViewportContainer/SubViewport"]
+z_index = 2
 collision_layer = 2
 collision_mask = 2
 
@@ -78,6 +82,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_cjv0f")
 
 [node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport"]
+z_index = 1
 points = PackedVector2Array(219, 34, 126, 288)
 width = 3.0
 

@@ -1,4 +1,6 @@
 extends Control
+signal caught(tex)
+signal cleared
 var loaded: int
 var lvlsize: Vector2
 var playing = false
@@ -72,6 +74,14 @@ func _ready() -> void:
 	player.dir = Vector2(1 , 1)
 	cam.limit_bottom = maxY
 	
+	#create background fishes
+	for i in randi_range(10 , 20):
+		var fish = Global.backgroundfish.instantiate()
+		fish.position.y = randi_range(50 , maxY)
+		fish.position.x = randi_range(0 , lvlsize.x)
+		fish.size.y = lvlsize.x
+		$SubViewportContainer/SubViewport.add_child(fish)
+	
 
 func _process(delta: float) -> void:
 	line.points[1] = player.position - Vector2(2 , 14)
@@ -81,10 +91,12 @@ func _process(delta: float) -> void:
 		player.p = 0
 		for i in fishes:
 			i.p = 0
+		$FrenzyTimer.paused = true
 	else:
 		player.p = 1
 		for i in fishes:
 			i.p = 1
+		$FrenzyTimer.paused = false
 	#update camera and check player collision with walls
 	cam.position.y = player.position.y
 	if player.position.x >= lvlsize.x - (player.size.x / 2) - 2:
@@ -97,6 +109,7 @@ func _process(delta: float) -> void:
 		player.dir.y = -1
 	#when th eplayer reaches the top, reset its stats and collect the fish for scoring
 	if player.position.y <= 0 + (player.size.y / 2):
+		cleared.emit()
 		player.ext = Vector2(1 , 1)
 		player.scale = Vector2(1 , 1)
 		player.dir.y = 1
@@ -208,14 +221,15 @@ func create_fishes(remove):
 	#add fishes into the game
 	for i in fishes:
 		$SubViewportContainer/SubViewport.add_child(i)
+		
 	#add in the (obs)tacles based on current level
 	for i in level:
 		var obs = Global.obs.instantiate()
 		obs.position.x = Global.screen.x / Global.players * randi_range(0 , 1)
 		if obs.position.x == 0:
-			obs.position.x += 50
+			obs.position.x += 50 + randi_range(-lvlsize.x / 3, 25)
 		else:
-			obs.position.x -= 50
+			obs.position.x -= 50 + randi_range(-25 , lvlsize.x / 3)
 		obs.position.y = randi_range(100 , maxY)
 		$SubViewportContainer/SubViewport.add_child(obs)
 
@@ -253,6 +267,7 @@ func _on_player_power(type: Variant) -> void:
 			var score = Global.score.instantiate()
 			score.t = "+150"
 			player.held += 1
+			caught.emit(Global.BONUS)
 			score.position = player.position
 			player.get_parent().add_child(score)
 		"size":
