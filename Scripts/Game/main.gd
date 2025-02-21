@@ -1,7 +1,8 @@
 extends Node2D
-
+signal tstsig()
 #musics
 @onready var mmus: AudioStreamPlayer = $AudioStreamPlayer
+var fish = []
 
 func _ready() -> void:
 	var mm = Global.menu.instantiate() #instantiates a menu on game start

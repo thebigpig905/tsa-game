@@ -21,8 +21,10 @@ func _ready() -> void:
 	#resize elements and position them correctly
 	sizex = size.x
 	v.custom_minimum_size = size
+	
 	plrbox.custom_minimum_size = size / Vector2(1 , 3)
 	plrname.custom_minimum_size = size / Vector2(1 , 3)
+	$TextureRect.custom_minimum_size = size
 	plrbox.color = Global.colors[Global.col[plr]]
 	score.custom_minimum_size.y = size.y / 4
 	h.custom_minimum_size.y = size.y / 4

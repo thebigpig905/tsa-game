@@ -16,6 +16,7 @@ func _ready() -> void:
 	btns.btnName = "Main Menu"
 	btns.connect("clicked" , Callable(self , "_on_btn_clicked"))
 	$VBoxContainer.add_child(btns)
+	$ColorRect.custom_minimum_size = Global.screen
 
 
 func _on_btn_clicked(btn):

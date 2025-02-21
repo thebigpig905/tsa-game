@@ -20,6 +20,8 @@ var roundnum = preload("res://Scenes/round.tscn")
 var obs = preload("res://Scenes/obstacle.tscn")
 var score = preload("res://Scenes/score.tscn")
 var backgroundfish = preload("res://Scenes/backgroundfish.tscn")
+var title = preload("res://Scenes/title.tscn")
+var cred = preload("res://Scenes/credits.tscn")
 #Player info
 var playerNames = ["Player 1" , "Player 2"]
 var col = [0 , 1]

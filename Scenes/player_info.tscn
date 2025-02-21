@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr4j0uj3ekb8r"]
+[gd_scene load_steps=5 format=3 uid="uid://dr4j0uj3ekb8r"]
 
 [ext_resource type="Script" path="res://Scripts/UI/player_info.gd" id="1_tvsui"]
+[ext_resource type="Texture2D" uid="uid://6a4l78ndpgle" path="res://Assets/Textures/button background0.png" id="2_qnvvd"]
 [ext_resource type="Texture2D" uid="uid://xlw5ep6j6upf" path="res://Assets/Placeholders/HpbarBG.png" id="2_vwsjk"]
 [ext_resource type="Texture2D" uid="uid://cdjywx67xl717" path="res://Assets/Placeholders/hpbar.png" id="3_8s6qg"]
 
@@ -8,6 +9,14 @@
 offset_right = 144.0
 offset_bottom = 80.0
 script = ExtResource("1_tvsui")
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_qnvvd")
+patch_margin_left = 32
+patch_margin_top = 6
+patch_margin_right = 32
+patch_margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -31,11 +40,11 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
+theme_override_constants/margin_left = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = -4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

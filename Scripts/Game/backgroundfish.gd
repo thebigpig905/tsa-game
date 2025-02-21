@@ -16,10 +16,11 @@ func _ready() -> void:
 		fishsize = 36
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if get_parent().get_parent().get_parent().get_parent().paused == true:
-		p = 0
-	else:
-		p = 1
+	if !get_parent().has_signal("tstsig"):
+		if get_parent().get_parent().get_parent().get_parent().paused == true:
+			p = 0
+		else:
+			p = 1
 	if position.x > size.y - fishsize:
 		dir = -1
 	if position.x < size.x + fishsize:

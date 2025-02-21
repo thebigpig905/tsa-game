@@ -68,12 +68,6 @@ func _ready() -> void:
 		level = 1
 		create_fishes(false)
 		
-	#start game on timer end
-	await get_parent().get_child(0).timeout
-	playing = true
-	player.dir = Vector2(1 , 1)
-	cam.limit_bottom = maxY
-	
 	#create background fishes
 	for i in randi_range(10 , 20):
 		var fish = Global.backgroundfish.instantiate()
@@ -81,6 +75,13 @@ func _ready() -> void:
 		fish.position.x = randi_range(0 , lvlsize.x)
 		fish.size.y = lvlsize.x
 		$SubViewportContainer/SubViewport.add_child(fish)
+		
+	#start game on timer end
+	await get_parent().get_child(0).timeout
+	playing = true
+	player.dir = Vector2(1 , 1)
+	cam.limit_bottom = maxY
+
 	
 
 func _process(delta: float) -> void:
