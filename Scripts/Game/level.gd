@@ -4,11 +4,14 @@ signal cleared
 var loaded: int
 var lvlsize: Vector2
 var playing = false
+var big = false
 #important nodes
 @onready var player = $SubViewportContainer/SubViewport/Player
 @onready var ptimer = $SubViewportContainer/SubViewport/Player/Timer
 @onready var background = $SubViewportContainer/SubViewport/Background
 @onready var cam: Camera2D = $SubViewportContainer/SubViewport/Camera2D
+@onready var frenzy = $FrenzyTimer
+
 
 #walls
 @onready var left: StaticBody2D = $SubViewportContainer/SubViewport/Left
@@ -111,7 +114,12 @@ func _process(delta: float) -> void:
 	#when th eplayer reaches the top, reset its stats and collect the fish for scoring
 	if player.position.y <= 0 + (player.size.y / 2):
 		cleared.emit()
+		
 		player.ext = Vector2(1 , 1)
+		if big:
+			big = false
+			$Big/Reverse.play("Reverse")
+			$Big.play()
 		player.scale = Vector2(1 , 1)
 		player.dir.y = 1
 		var score = Global.score.instantiate()
@@ -119,10 +127,11 @@ func _process(delta: float) -> void:
 			Global.scores[loaded] += player.held * 150
 			score.t = "+" + str(player.held * 150)
 			score.g = true
+			$CashingIn.play()
 		else:
 			Global.scores[loaded] += player.held * 100
 			score.t = "+" + str(player.held * 100)
-		
+			$CashingIn.play()
 		score.position = Vector2((size.x / 2) - (score.size.x / 2), 100)
 		if int(score.t) != 0:
 			player.get_parent().add_child(score)
@@ -222,7 +231,6 @@ func create_fishes(remove):
 	#add fishes into the game
 	for i in fishes:
 		$SubViewportContainer/SubViewport.add_child(i)
-		
 	#add in the (obs)tacles based on current level
 	for i in level:
 		var obs = Global.obs.instantiate()
@@ -240,6 +248,7 @@ func _on_player_power(type: Variant) -> void:
 		"sheild":
 			#activate the shield
 			sheilded = true
+			$Shielded.play()
 		"pslow":
 			#gets all other active levels and slows the player speed
 			for i in get_parent().get_child_count():
@@ -248,21 +257,29 @@ func _on_player_power(type: Variant) -> void:
 						#remove shield if sheilded, otherwise run the effect
 						if get_parent().get_child(i).sheilded == false:
 							get_parent().get_child(i).player.ext = Vector2(0.5 , 1)
+							$SlowDown.play()
 						else:
 							get_parent().get_child(i).sheilded = false
+							$ShieldLost.play()
+							
+							
 		"pfast":
 			#gets all fish in other levels and makes them fast
 			for i in get_parent().get_child_count():
 				if get_parent().get_child(i).has_method("_on_player_power"):
 					if get_parent().get_child(i) != self:
 						if get_parent().get_child(i).sheilded == false:
+							$SpeedUp.play()
+							$SpeedUp/SpeedUp.play("SpeedUp")
 							for k in get_parent().get_child(i).get_child(0).get_child(0).get_children():
 								if k.has_method("fish"):
 									if k.type != "power":
 										k.speed = randi_range(175 , 300)
 						else:
 							get_parent().get_child(i).sheilded = false
+							$ShieldLost.play()
 		"bonus":
+			$Bonus.play()
 			#bonus points yay
 			Global.scores[loaded] += 150
 			var score = Global.score.instantiate()
@@ -272,9 +289,12 @@ func _on_player_power(type: Variant) -> void:
 			score.position = player.position
 			player.get_parent().add_child(score)
 		"size":
+			$Big.play()
+			big = true
 			#makes the player bigger
 			player.scale = Vector2(2 , 2)
 		"frenzy":
+			$Frenzy.play()
 			#start the frenzy timer
 			$FrenzyTimer.start()
 			player.frenzy = true
@@ -285,7 +305,10 @@ func _on_player_power(type: Variant) -> void:
 			#trash -points -hp
 			if sheilded:
 				sheilded = false
+				$ShieldLost.play()
+				
 			else:
+				$Plastic.play()
 				Global.scores[loaded] -= 50
 				_on_player_damaged()
 				var score = Global.score.instantiate()
@@ -297,7 +320,10 @@ func _on_player_power(type: Variant) -> void:
 			#same as trash1
 			if sheilded:
 				sheilded = false
+				$ShieldLost.play()
+				
 			else:
+				$Plastic.play()
 				Global.scores[loaded] -= 50
 				_on_player_damaged()
 				var score = Global.score.instantiate()
@@ -308,6 +334,7 @@ func _on_player_power(type: Variant) -> void:
 
 
 func _on_player_damaged() -> void:
+	
 	$border.visible = true
 	$borderTime.start()
 	hp -= 1
@@ -316,7 +343,10 @@ func _on_player_damaged() -> void:
 	score.g = false
 	score.position = player.position + Vector2(0 , 24)
 	player.get_parent().add_child(score)
-	if hp <= 0:
+	if hp > 0:
+		$Hurt.play()
+	elif hp <= 0:
+		$Dead.play()
 		level = 0
 		fish_left = 0
 		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
@@ -333,3 +363,25 @@ func _on_player_damaged() -> void:
 func _on_frenzy_timer_timeout() -> void:
 	#clear the border
 	$border.visible = false
+
+
+func _on_area_2d_body_entered(body):
+	#playing the sounds
+	if body.type == "fish":
+		
+		if !player.full:
+			if $pop2.playing == false:
+				$pop2.play()
+		elif player.full:
+			if !player.frenzy:
+				$TooFull.play()
+				
+		
+	if body.type == "bad":
+		if !sheilded:
+			$badfish.play()
+		elif sheilded:
+			$ShieldLost.play()
+			
+			print("nos")
+	

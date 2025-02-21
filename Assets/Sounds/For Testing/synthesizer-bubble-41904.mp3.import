@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dlvc3wpmccnvw"
+path="res://.godot/imported/synthesizer-bubble-41904.mp3-6f0882d1910780200979eb82e9531832.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/For Testing/synthesizer-bubble-41904.mp3"
+dest_files=["res://.godot/imported/synthesizer-bubble-41904.mp3-6f0882d1910780200979eb82e9531832.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

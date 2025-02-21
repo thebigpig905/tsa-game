@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://88r0mvpc4o0b"
+path="res://.godot/imported/electronic-percussion-3-97322.mp3-987be7ad1b971b16b1674c640b686316.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/For Testing/electronic-percussion-3-97322.mp3"
+dest_files=["res://.godot/imported/electronic-percussion-3-97322.mp3-987be7ad1b971b16b1674c640b686316.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

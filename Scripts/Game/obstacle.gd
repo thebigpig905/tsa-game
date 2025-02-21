@@ -14,6 +14,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.hurt()
 	else:
 		body.get_parent().get_parent().get_parent().sheilded = false
+		body.get_parent().get_parent().get_parent().get_child(8).play()
+		
 
 func _process(delta: float) -> void:
 	if get_parent().get_parent().get_parent().get_parent().paused == false:

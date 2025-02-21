@@ -16,7 +16,7 @@ var size: Vector2 = Vector2(16 , 30)
 var plr:int
 var p = 1 #p is 0 when game is paused to stop movement
 var frenzy:bool = false #is frenzy active
-
+var full = false #is player full
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	velocity = dir * speed * ext * p
@@ -29,6 +29,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if !frenzy:
 			if held < Global.settings["weight"]:
 				get_parent().get_parent().get_parent().caught.emit(body.get_child(0).texture)
+				full = false
 				held += 1
 				var score = Global.score.instantiate()
 				score.t = "+1"
@@ -51,6 +52,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				score.g = "b"
 				score.position = position
 				get_parent().add_child(score)
+				full = true
 		else:
 			get_parent().get_parent().get_parent().caught.emit(body.get_child(0).texture)
 			held += 1

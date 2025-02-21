@@ -18,4 +18,9 @@ func startgame(round):
 	var g = Global.game.instantiate()
 	g.round = round
 	add_child(g)
+func _process(delta):
+	if Input.is_action_just_pressed("clickL"):
 	
+		$Click.play()
+		print("Click")
+		

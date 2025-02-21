@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cknh682yx4u42"
+path="res://.godot/imported/cinematic-music-sketches-11-cinematic-percussion-sketch-116186.mp3-92799615dfd380c1544a2a2b1ac4c389.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/For Testing/cinematic-music-sketches-11-cinematic-percussion-sketch-116186.mp3"
+dest_files=["res://.godot/imported/cinematic-music-sketches-11-cinematic-percussion-sketch-116186.mp3-92799615dfd380c1544a2a2b1ac4c389.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

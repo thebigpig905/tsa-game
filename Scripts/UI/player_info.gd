@@ -36,6 +36,7 @@ func _ready() -> void:
 	get_parent().get_parent().get_parent().levels[plr].connect("caught" , Callable(self , "_on_catch"))
 	get_parent().get_parent().get_parent().levels[plr].connect("cleared" , Callable(self , "_on_clear"))
 	update()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
