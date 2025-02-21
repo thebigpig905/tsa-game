@@ -23,14 +23,6 @@ var new: String
 func _ready() -> void:
 	size = Global.screen #resize
 	updateButtons() #read it
-	if type == "main":
-		for i in randi_range(20 , 30):
-			var fish = Global.backgroundfish.instantiate()
-			fish.position.y = randi_range(0 , Global.screen.y)
-			fish.position.x = randi_range(0 , Global.screen.x)
-			fish.size.y = Global.screen.x
-			get_parent().add_child(fish)
-			get_parent().fish.append(fish)
 	
 func _process(delta: float) -> void:
 	size = Global.screen #resize constantly
@@ -52,10 +44,6 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				type = "controls"
 				updateButtons()
 			"Start":
-				for i in get_parent().fish:
-					get_parent().remove_child(i)
-					i.queue_free()
-				get_parent().fish.clear()
 				get_parent().mmus.stop()
 				get_parent().add_child(Global.game.instantiate()) #starts the main game
 				get_parent().remove_child(self) #removes self
@@ -116,10 +104,6 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				updateButtons()
 			"Main Menu":
 				get_tree().reload_current_scene()
-			"Credits":
-				get_parent().add_child(Global.cred.instantiate())
-				get_parent().remove_child(self)
-				queue_free()
 			_:
 				print("could not find button: " , btn) #if button pressed does not appear in the above list, add it
 		print(prev)
@@ -161,11 +145,6 @@ func updateButtons():
 		var menu = Global.setting.instantiate() #if you are loading the settings page, add the settings scene
 		
 		$ButtonHolder.add_child(menu)
-	if type == "main":
-		print(size.x)
-		var title = Global.title.instantiate()
-		title.add_theme_constant_override("margin_left" , 100)
-		$ButtonHolder.add_child(title)
 	for i in buttons[type].size(): #runs through the array of button names in the dictionary with the keythat is the type of menu loaded
 		var newbtn = Global.menuBtnScn.instantiate()
 		newbtn.btnName = buttons[type][i]

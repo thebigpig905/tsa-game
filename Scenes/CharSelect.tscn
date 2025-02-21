@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgpoh447rrxmu"]
+[gd_scene load_steps=12 format=3 uid="uid://cgpoh447rrxmu"]
 
 [ext_resource type="Script" path="res://Scripts/UI/char_select.gd" id="1_fp38c"]
 [ext_resource type="Texture2D" uid="uid://t4e67bfrenj0" path="res://Assets/Textures/main background0.png" id="1_gbe1r"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/UI/remove.gd" id="2_f7as4"]
 [ext_resource type="PackedScene" uid="uid://ci1buhwjb03xx" path="res://Scenes/line_edit.tscn" id="2_jxkit"]
 [ext_resource type="Script" path="res://Scripts/UI/right_arr.gd" id="3_bgaiw"]
-[ext_resource type="Texture2D" uid="uid://vvotpw6jw5ql" path="res://Assets/Textures/player icon background0.png" id="3_fo3oa"]
 [ext_resource type="Script" path="res://Scripts/UI/rename.gd" id="3_fyfcf"]
 [ext_resource type="Texture2D" uid="uid://bgfk86s6ts6be" path="res://Assets/Textures/left arrow0.png" id="3_knohm"]
 [ext_resource type="Texture2D" uid="uid://clw35063mfwi7" path="res://Assets/Textures/right arrow0.png" id="5_qgm6f"]
@@ -37,10 +36,9 @@ layout_mode = 2
 [node name="P" type="CenterContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayerIcon" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/P"]
+[node name="PlayerIcon" type="ColorRect" parent="MarginContainer/CenterContainer/VBoxContainer/P"]
 custom_minimum_size = Vector2(195, 195)
 layout_mode = 2
-texture = ExtResource("3_fo3oa")
 
 [node name="B" type="CenterContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2

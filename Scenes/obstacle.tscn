@@ -7,7 +7,6 @@
 size = Vector2(26, 25)
 
 [node name="Obstacle" type="Sprite2D"]
-z_index = 1
 position = Vector2(21, 21)
 texture = ExtResource("1_ccefr")
 script = ExtResource("2_yg5dm")

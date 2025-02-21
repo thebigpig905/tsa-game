@@ -7,6 +7,7 @@ var started = false
 var finished = false
 var round:int = 1
 
+
 func _ready() -> void:
 	time.size.x = Global.screen.x
 	time.position.y = 20
@@ -36,12 +37,23 @@ func _ready() -> void:
 		time.text += "0" + str(Global.settings["timer"] % 60)
 	else:
 		time.text += str(Global.settings["timer"] % 60)
+	$Countdown.play()
 	await $Start.timeout
+	$Countdown.stop()
+	$waterish.play()
+	$FloatingCat.play()
+	$FloatingCat/fade.play("FadeIn")
 	$End.start()
 	started = true
 
 func _process(delta: float) -> void:
 	if started:
+		if floor($End.time_left) == 25 and not $"ending soon".playing:
+			$"ending soon".play()
+		if floor($End.time_left) == 3 and $FloatingCat.playing:
+			$FloatingCat/fade.play("FadeOut")
+			
+			
 		if floor($End.time_left / 60) != 0:
 			time.text = str(floor($End.time_left / 60)) + ":"
 		else:
@@ -54,14 +66,12 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("esc"):
 			if paused:
 				paused = false
-				$End.paused = false
 				if get_child(-1).name == "Menu":
 					var remove = get_child(-1)
 					remove_child(remove)
 					remove.queue_free()
 			else:
 				paused = true
-				$End.paused = true
 				var menu = Global.menu.instantiate()
 				menu.type = "playing"
 				add_child(menu)
@@ -71,4 +81,5 @@ func _process(delta: float) -> void:
 func _on_end_timeout() -> void:
 	finished = true
 	paused = true
+	$Final.play()
 	add_child(Global.endScreen.instantiate())
