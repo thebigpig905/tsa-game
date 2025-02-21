@@ -51,6 +51,7 @@ const RED_FISH = preload("res://Assets/Textures/fish red0.png")
 const YELLOW_FISH = preload("res://Assets/Placeholders/yellowFish.png")
 
 const JELLYFISH = preload("res://Assets/Textures/jellyfish0.png")
+const PUFFERFISH = preload("res://Assets/Textures/pufferfish0.png")
 
 const BIG_HOOK = preload("res://Assets/Placeholders/bigHook.png")
 const BONUS = preload("res://Assets/Textures/fish golden0.png")
