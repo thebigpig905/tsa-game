@@ -19,8 +19,9 @@ var endPlr = preload("res://Scenes/end_name.tscn")
 var roundnum = preload("res://Scenes/round.tscn")
 var obs = preload("res://Scenes/obstacle.tscn")
 var score = preload("res://Scenes/score.tscn")
-
-
+var backgroundfish = preload("res://Scenes/backgroundfish.tscn")
+var title = preload("res://Scenes/title.tscn")
+var cred = preload("res://Scenes/credits.tscn")
 #Player info
 var playerNames = ["Player 1" , "Player 2"]
 var col = [0 , 1]
@@ -34,22 +35,22 @@ var switchDef = ["Q" , "O" , "Left" , "Kp 5"]
 var useDef = ["W" , "P" , "Right" , "Kp 6"]
 
 #game settings
-var settings = {"rounds": 1 , "powerups": true , "lives": 5 , "timer": 180 , "weight": 5 , "length": 2}
-var settingsDef = {"rounds": 1 , "powerups": true , "lives": 5 , "timer": 180 , "weight": 5 , "length": 2}
+var settings = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 60 , "weight": 5 , "length": 2}
+var settingsDef = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 60 , "weight": 5 , "length": 2}
 
 #game window size
 var screen:Vector2 = DisplayServer.window_get_size()
 
 #preload textures
-const BLUE_FISH = preload("res://Assets/Textures/fish blue0.png")
-const GREEN_FISH = preload("res://Assets/Textures/fish green0.png")
+const BLUE_FISH = preload("res://Assets/Textures/new fish0.png")
 const HOOK = preload("res://Assets/Placeholders/hook.png")
-const ORANGE_FISH = preload("res://Assets/Textures/fish nemo0.png")
-const PURPLE_FISH = preload("res://Assets/Textures/fish purple0.png")
+const ORANGE_FISH = preload("res://Assets/Textures/fish green0.png")
+const PURPLE_FISH = preload("res://Assets/Textures/starfish0.png")
 const RED_FISH = preload("res://Assets/Textures/fish red0.png")
 const YELLOW_FISH = preload("res://Assets/Placeholders/yellowFish.png")
+const GREEN_FISH = preload("res://Assets/Textures/light blue fishh0.png")
 
-const PUFFERFISH = preload("res://Assets/Textures/puffer fish0.png")
+const PUFFERFISH = preload("res://Assets/Textures/pufferfish0.png")
 const JELLYFISH = preload("res://Assets/Textures/jellyfish0.png")
 
 const BIG_HOOK = preload("res://Assets/Placeholders/bigHook.png")
