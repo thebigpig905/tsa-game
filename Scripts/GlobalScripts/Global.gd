@@ -35,8 +35,8 @@ var switchDef = ["Q" , "O" , "Left" , "Kp 5"]
 var useDef = ["W" , "P" , "Right" , "Kp 6"]
 
 #game settings
-var settings = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 60 , "weight": 5 , "length": 2}
-var settingsDef = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 60 , "weight": 5 , "length": 2}
+var settings = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 90 , "weight": 5 , "length": 2}
+var settingsDef = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 90 , "weight": 5 , "length": 2}
 
 #game window size
 var screen:Vector2 = DisplayServer.window_get_size()

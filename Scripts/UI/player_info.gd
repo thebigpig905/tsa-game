@@ -62,7 +62,7 @@ func update():
 		fish.texture = i
 		fishdisp.add_child(fish)
 	#fix separation so size stays good
-	fishdisp.add_theme_constant_override("separation" , clamp((((Global.screen.x / Global.players) - 20) - (32 * clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF))) / (clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF)-1) , -INF , 4))
+	fishdisp.add_theme_constant_override("separation" , clamp((((Global.screen.x / Global.players) - 50) - (32 * clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF))) / (clamp(get_parent().get_parent().get_parent().levels[plr].player.held , Global.settings["weight"] , INF)-1) , -INF , 4))
 	#
 func _on_clear():
 	fishes.clear()

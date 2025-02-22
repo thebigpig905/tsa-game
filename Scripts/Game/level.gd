@@ -20,12 +20,12 @@ var fastdownp = false
 @onready var right: StaticBody2D = $SubViewportContainer/SubViewport/Right
 @onready var top: StaticBody2D = $SubViewportContainer/SubViewport/Top
 @onready var bottom: StaticBody2D = $SubViewportContainer/SubViewport/Bottom
-
+#rope
 @onready var line: Line2D = $SubViewportContainer/SubViewport/Line2D
 
 #game info
 var prev:Vector2 = Vector2(1 , 1) #previous player velocity for switching directions easier
-var level:int = 0
+@onready var level:int = get_parent().round
 var fish_left:int = 0
 
 var len = 1000 #level length 
@@ -70,7 +70,7 @@ func _ready() -> void:
 	#generate the fishes
 	create_fishes(true)
 	if Global.players < 3: #if there are less than 3 players, make it a bit harder
-		level = 1
+		level += 1
 		create_fishes(false)
 		
 	#create background fishes
@@ -375,7 +375,6 @@ func _on_player_damaged() -> void:
 	elif hp <= 0:
 		$Dead.play()
 		player.dir = Vector2(1 , 1)
-		level = 0
 		fish_left = 0
 		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
 		if Global.scores[loaded] % 10 != 0:
