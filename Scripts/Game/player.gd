@@ -73,6 +73,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 					break
 	if body.type == "bad":
 		if ! get_parent().get_parent().get_parent().sheilded:
+			get_parent().get_parent().get_parent().get_child(5).play()
 			Global.scores[plr] -= 250
 			var score = Global.score.instantiate()
 			score.t = "-250"
@@ -83,6 +84,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			$"../../../borderTime".start()
 		else:
 			get_parent().get_parent().get_parent().sheilded = false
+			get_parent().get_parent().get_parent().get_child(7).play()
 		for i in get_parent().get_parent().get_parent().fishes.size():
 			if get_parent().get_parent().get_parent().fishes[i] == body:
 				get_parent().get_parent().get_parent().fishes.remove_at(i)

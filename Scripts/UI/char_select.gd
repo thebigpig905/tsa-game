@@ -48,15 +48,15 @@ func _on_rename_clicked() -> void:
 	$MarginContainer/CenterContainer/LineEdit.visible = true #on rename clicked, make the rename box visible
 
 func _on_line_edit_text_changed(new_text: String) -> void:
-	$MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.text = $MarginContainer/CenterContainer/LineEdit.text
-
-
-func _on_line_edit_text_submitted(new_text: String) -> void:
 	if $MarginContainer/CenterContainer/LineEdit.text != "":
 		for i in get_parent().get_child_count():
 			if get_parent().get_child(i) == self:
 				Global.playerNames[i] = $MarginContainer/CenterContainer/LineEdit.text
-		$MarginContainer/CenterContainer/LineEdit.visible = false
+				$MarginContainer/CenterContainer/VBoxContainer/MarginContainer/Name.text = Global.playerNames[i]
+
+
+func _on_line_edit_text_submitted(new_text: String) -> void:
+	$MarginContainer/CenterContainer/LineEdit.visible = false
 
 
 func _on_left_arr_clicked() -> void:

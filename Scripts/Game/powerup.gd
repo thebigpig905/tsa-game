@@ -25,7 +25,7 @@ func _ready() -> void:
 	if type == "power":
 		$Sprite2D.texture = Global.textures[powers[num]]
 		if powers[num] != "size":
-			scale = Vector2(1.5 , 1.5)
+			scale *= Vector2(1.5 , 1.5)
 		if powers[num] == "bonus":
 			dir = Vector2(1 , 0)
 		if int(powers[num]) != 0:
@@ -34,7 +34,12 @@ func _ready() -> void:
 				dir = Vector2(1 , 0)
 			else:
 				dir = Vector2(-1 , 0)
-	
+		if num > 5:
+			$shiny1.queue_free()
+			$shiny2.queue_free()
+	else:
+		$shiny1.queue_free()
+		$shiny2.queue_free()
 	if type == "bad":
 		speed = 100
 		if randi_range(1 , 2) == 2:
@@ -48,6 +53,9 @@ func _ready() -> void:
 			dir = Vector2(-1 , 0)
 #update position and direction
 func _physics_process(delta: float) -> void:
+	if type == "power" and num < 6:
+		$shiny1.rotation_degrees += 0.5
+		$shiny2.rotation_degrees -= 0.5
 	velocity = speed * dir * p
 	move_and_slide()
 	if get_slide_collision_count() > 0:

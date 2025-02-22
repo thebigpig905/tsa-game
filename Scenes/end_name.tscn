@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://babsvd5t60tjx"]
+[gd_scene load_steps=6 format=3 uid="uid://babsvd5t60tjx"]
 
 [ext_resource type="Script" path="res://Scripts/Game/end_name.gd" id="1_ierx5"]
+[ext_resource type="Texture2D" uid="uid://cythgvc1bs7y0" path="res://Assets/Textures/mr smarty pants0.png" id="2_30bfy"]
+[ext_resource type="Texture2D" uid="uid://c6amg6k76ellq" path="res://Assets/Textures/plrnamebg.png" id="3_0sryw"]
+[ext_resource type="Texture2D" uid="uid://o87s6ox07wci" path="res://Assets/Textures/crown.png" id="3_rmjb5"]
+[ext_resource type="Texture2D" uid="uid://c3w7uhxxx6fad" path="res://Assets/Textures/scorebg.png" id="5_5gt00"]
 
 [node name="EndName" type="CenterContainer"]
 offset_right = 900.0
@@ -12,10 +16,26 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="background" type="ColorRect" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("2_30bfy")
+expand_mode = 1
+
+[node name="crown" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_rmjb5")
+expand_mode = 1
+
+[node name="background" type="NinePatchRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
-color = Color(0.462291, 0.462291, 0.462291, 1)
+texture = ExtResource("3_0sryw")
+patch_margin_left = 6
 
 [node name="PlayerName" type="Label" parent="HBoxContainer/background"]
 layout_mode = 0
@@ -26,10 +46,11 @@ text = "Player 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScoreBG" type="ColorRect" parent="HBoxContainer"]
+[node name="ScoreBG" type="NinePatchRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-color = Color(0.446777, 0.446777, 0.446777, 1)
+texture = ExtResource("5_5gt00")
+patch_margin_right = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScoreBG"]
 custom_minimum_size = Vector2(600, 80)

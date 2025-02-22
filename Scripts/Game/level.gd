@@ -5,6 +5,8 @@ var loaded: int
 var lvlsize: Vector2
 var playing = false
 var big = false
+var fastdown = false
+var fastdownp = false
 #important nodes
 @onready var player = $SubViewportContainer/SubViewport/Player
 @onready var ptimer = $SubViewportContainer/SubViewport/Player/Timer
@@ -88,6 +90,9 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	
+		
+
 	line.points[1] = player.position - Vector2(2 , 14)
 	$sheild.visible = sheilded #if shield is active, show the icon
 	#pause fish and player on game pause
@@ -96,7 +101,13 @@ func _process(delta: float) -> void:
 		for i in fishes:
 			i.p = 0
 		$FrenzyTimer.paused = true
+		if $FastDown.playing:
+			$FastDown.volume_db = -30
+			fastdownp = true
 	else:
+		if fastdownp:
+			fastdownp = false
+			$FastDown.volume_db = 0
 		player.p = 1
 		for i in fishes:
 			i.p = 1
@@ -111,6 +122,8 @@ func _process(delta: float) -> void:
 		if player.dir.y == 2:
 			player.dir.x = prev.x
 		player.dir.y = -1
+		if $FastDown.playing:
+			$FastDown/Slow.play("Stop")
 	#when th eplayer reaches the top, reset its stats and collect the fish for scoring
 	if player.position.y <= 0 + (player.size.y / 2):
 		cleared.emit()
@@ -162,14 +175,28 @@ func _input(event: InputEvent) -> void:
 					else:
 						if player.dir.y > 0: #if double click speed downwards
 							player.dir = Vector2(0 , 2)
+							if !fastdown:
+								$FastDown/Slow.play("RESET")
+								$FastDown.play()
+								fastdown = true
+							
+							
+			
 			else:
 				if player.dir == Vector2(0 , 2):
+					if $FastDown.playing:
+						$FastDown/Slow.play("Stop")
+						fastdown = false
+						
 					player.dir = prev #if key up and you were speeding down, reset dir to prev
 		if event.as_text() == Global.use[loaded]: #if reel button is used, reel in if fish held > 0
 			if event.is_pressed() == true:
 				if event.is_echo() == false:
 					if player.held > 0:
 						if player.dir.y == 2:
+							if $FastDown.playing:
+								$FastDown/Slow.play("Stop")
+								fastdown = false
 							player.dir.x = prev.x
 						player.dir.y = -1
 
@@ -347,6 +374,7 @@ func _on_player_damaged() -> void:
 		$Hurt.play()
 	elif hp <= 0:
 		$Dead.play()
+		player.dir = Vector2(1 , 1)
 		level = 0
 		fish_left = 0
 		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
@@ -377,11 +405,10 @@ func _on_area_2d_body_entered(body):
 				$TooFull.play()
 				
 		
-	if body.type == "bad":
-		if !sheilded:
-			$badfish.play()
-		elif sheilded:
-			$ShieldLost.play()
-			
-			print("nos")
+
 	
+
+
+func _on_slow_animation_finished(anim_name):
+	if anim_name == "Stop":
+		$FastDown.stop()

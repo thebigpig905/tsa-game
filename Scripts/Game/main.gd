@@ -13,14 +13,14 @@ func _ready() -> void:
 func startgame(round):
 	print(Global.total)
 	for i in get_children():
-		remove_child(i)
-		i.queue_free()
+		if i.name != "AudioStreamPlayer" and i.name != "Click":
+			remove_child(i)
+			i.queue_free()
 	var g = Global.game.instantiate()
 	g.round = round
 	add_child(g)
 func _process(delta):
 	if Input.is_action_just_pressed("clickL"):
-	
 		$Click.play()
 		print("Click")
 		

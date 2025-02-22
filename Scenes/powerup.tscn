@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://r2ujq1esvh31"]
+[gd_scene load_steps=5 format=3 uid="uid://r2ujq1esvh31"]
 
 [ext_resource type="Script" path="res://Scripts/Game/powerup.gd" id="1_82ik0"]
-[ext_resource type="Texture2D" uid="uid://d0rln0droe6th" path="res://Assets/Placeholders/blueFish.png" id="2_60epg"]
+[ext_resource type="Texture2D" uid="uid://btg3s6mj0d320" path="res://Assets/Textures/shiny.png" id="2_0q2lq"]
+[ext_resource type="Texture2D" uid="uid://t8f3d1yqbhjh" path="res://Assets/Textures/bonus points0.png" id="3_lyhq4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1tdhm"]
 
@@ -11,8 +12,16 @@ collision_layer = 6
 collision_mask = 2
 script = ExtResource("1_82ik0")
 
+[node name="shiny1" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_0q2lq")
+
+[node name="shiny2" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("2_0q2lq")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_60epg")
+texture = ExtResource("3_lyhq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

@@ -6,7 +6,7 @@ var type = "scores"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HBoxContainer/background/PlayerName.text = Global.playerNames[plr]
-	$HBoxContainer/background.color = Global.colors[Global.col[plr]]
+	$HBoxContainer/background.self_modulate = Global.colors[Global.col[plr]]
 	if type == "scores":
 		$HBoxContainer/ScoreBG/HBoxContainer/MarginContainer/Score.text = "Score: " + str(Global.scores[plr])
 	if type == "total":
@@ -16,6 +16,7 @@ func _ready() -> void:
 	match loaded:
 		0:
 			$HBoxContainer/ScoreBG/HBoxContainer/Place.add_theme_color_override("font_color" , Color.GOLD)
+			$HBoxContainer/MarginContainer/crown.visible = true
 		1:
 			$HBoxContainer/ScoreBG/HBoxContainer/Place.add_theme_color_override("font_color" , Color.SILVER)
 		2:

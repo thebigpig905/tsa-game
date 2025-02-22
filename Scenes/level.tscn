@@ -1,13 +1,188 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdhr0jkcfalc3"]
+[gd_scene load_steps=32 format=3 uid="uid://bdhr0jkcfalc3"]
 
 [ext_resource type="Script" path="res://Scripts/Game/level.gd" id="1_ngj87"]
 [ext_resource type="PackedScene" uid="uid://vl27g7nuolo1" path="res://Scenes/player.tscn" id="2_6ku75"]
 [ext_resource type="Texture2D" uid="uid://cna5xt1ouy52k" path="res://Assets/Placeholders/wall.png" id="3_a6txe"]
 [ext_resource type="Texture2D" uid="uid://c6q8fk0qrjise" path="res://Assets/Textures/gradient.png" id="3_fkl27"]
 [ext_resource type="Texture2D" uid="uid://c5opcqbticla7" path="res://Assets/Textures/shield0.png" id="4_uqv5y"]
+[ext_resource type="AudioStream" uid="uid://q8brkhn8w26" path="res://Assets/Sounds/For Testing/error-sound-39539.mp3" id="6_f2lrv"]
+[ext_resource type="AudioStream" uid="uid://kgmqueeg1b0u" path="res://Assets/Sounds/For Testing/ding-36029.mp3" id="7_3kqn6"]
+[ext_resource type="AudioStream" uid="uid://dbfyw70goo5yj" path="res://Assets/Sounds/For Testing/pop-1-35897.mp3" id="8_how5q"]
+[ext_resource type="AudioStream" uid="uid://dt7lfi52j3ssx" path="res://Assets/Sounds/For Testing/wrong-47985.mp3" id="9_srqqb"]
+[ext_resource type="AudioStream" uid="uid://xaoyas1pw8ka" path="res://Assets/Sounds/For Testing/cash-register-purchase-87313.mp3" id="10_nasyh"]
+[ext_resource type="AudioStream" uid="uid://dlvc3wpmccnvw" path="res://Assets/Sounds/For Testing/synthesizer-bubble-41904.mp3" id="11_v6sr1"]
+[ext_resource type="AudioStream" uid="uid://88r0mvpc4o0b" path="res://Assets/Sounds/For Testing/electronic-percussion-3-97322.mp3" id="12_b75fk"]
+[ext_resource type="AudioStream" uid="uid://10w7porr04n1" path="res://Assets/Sounds/For Testing/plastic-crunch-83779.mp3" id="13_u8fsf"]
+[ext_resource type="AudioStream" uid="uid://dxyaytnxtkkma" path="res://Assets/Sounds/For Testing/coin-pickup-98269.mp3" id="14_h1tav"]
+[ext_resource type="AudioStream" uid="uid://5daokjnn6eav" path="res://Assets/Sounds/For Testing/metal-whoosh-hit-4-201906.mp3" id="15_p2wt7"]
+[ext_resource type="AudioStream" uid="uid://saiitxta64dw" path="res://Assets/Sounds/For Testing/small-rock-break-194553.mp3" id="16_smpwt"]
+[ext_resource type="AudioStream" uid="uid://dyqbdsyeq22t4" path="res://Assets/Sounds/For Testing/bubble-pop-283674.mp3" id="17_ed8l4"]
+[ext_resource type="Script" path="res://Scenes/randp.gd" id="18_jafo6"]
+[ext_resource type="AudioStream" uid="uid://cgnmxt1vt1a4c" path="res://Assets/Sounds/For Testing/loop-air-bubbles-159283.mp3" id="19_5som0"]
+[ext_resource type="AudioStream" uid="uid://dmyp1rveu62c4" path="res://Assets/Sounds/For Testing/woosh-260275.mp3" id="19_jc1da"]
+[ext_resource type="AudioStream" uid="uid://ckcl7kb6fb0vx" path="res://Assets/Sounds/For Testing/bubble-pop-2-293341.mp3" id="21_dvcbl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjv0f"]
 size = Vector2(8.5, 9)
+
+[sub_resource type="Animation" id="Animation_xj2pt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tfcui"]
+resource_name = "Stop"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j35s2"]
+_data = {
+"RESET": SubResource("Animation_xj2pt"),
+"Stop": SubResource("Animation_tfcui")
+}
+
+[sub_resource type="Animation" id="Animation_c1pr2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.68]
+}
+
+[sub_resource type="Animation" id="Animation_0jodh"]
+resource_name = "Reverse"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.68, 0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jlgm0"]
+_data = {
+"RESET": SubResource("Animation_c1pr2"),
+"Reverse": SubResource("Animation_0jodh")
+}
+
+[sub_resource type="Animation" id="Animation_yqkco"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_b75fk")]
+}
+
+[sub_resource type="Animation" id="Animation_ue5ua"]
+resource_name = "SpeedUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.36, 2.68]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_b75fk")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fm0lx"]
+_data = {
+"RESET": SubResource("Animation_yqkco"),
+"SpeedUp": SubResource("Animation_ue5ua")
+}
 
 [node name="Level" type="Control"]
 layout_mode = 3
@@ -114,7 +289,95 @@ offset_right = 76.0
 offset_bottom = 65.0
 texture = ExtResource("4_uqv5y")
 
+[node name="badfish" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_f2lrv")
+
+[node name="Frenzy" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3kqn6")
+pitch_scale = 1.61
+
+[node name="ShieldLost" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_how5q")
+volume_db = 4.0
+pitch_scale = 0.3
+
+[node name="TooFull" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_srqqb")
+pitch_scale = 1.54
+
+[node name="CashingIn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_nasyh")
+
+[node name="Shielded" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_v6sr1")
+volume_db = 4.0
+pitch_scale = 4.0
+
+[node name="SlowDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_b75fk")
+volume_db = 4.0
+pitch_scale = 0.55
+
+[node name="Plastic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_u8fsf")
+volume_db = 8.0
+
+[node name="Bonus" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_h1tav")
+volume_db = 6.0
+pitch_scale = 1.34
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_p2wt7")
+volume_db = 7.0
+pitch_scale = 2.0
+
+[node name="Dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_smpwt")
+volume_db = -7.0
+pitch_scale = 3.3
+
+[node name="pop2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_ed8l4")
+volume_db = 4.0
+script = ExtResource("18_jafo6")
+
+[node name="FastDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_5som0")
+script = ExtResource("18_jafo6")
+
+[node name="Slow" type="AnimationPlayer" parent="FastDown"]
+libraries = {
+"": SubResource("AnimationLibrary_j35s2")
+}
+
+[node name="Big" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_jc1da")
+volume_db = 12.0
+pitch_scale = 2.68
+
+[node name="Reverse" type="AnimationPlayer" parent="Big"]
+libraries = {
+"": SubResource("AnimationLibrary_jlgm0")
+}
+
+[node name="SpeedUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_b75fk")
+pitch_scale = 0.36
+
+[node name="SpeedUp" type="AnimationPlayer" parent="SpeedUp"]
+libraries = {
+"": SubResource("AnimationLibrary_fm0lx")
+}
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_dvcbl")
+
 [connection signal="damaged" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_damaged"]
 [connection signal="power" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_power"]
+[connection signal="body_entered" from="SubViewportContainer/SubViewport/Player/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="FrenzyTimer" to="." method="_on_frenzy_timer_timeout"]
 [connection signal="timeout" from="FrenzyTimer" to="SubViewportContainer/SubViewport/Player" method="_on_frenzy_timer_timeout"]
+[connection signal="animation_finished" from="FastDown/Slow" to="." method="_on_slow_animation_finished"]
+
+[editable path="SubViewportContainer/SubViewport/Player"]

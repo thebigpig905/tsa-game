@@ -6,7 +6,7 @@ var levels = []
 var started = false
 var finished = false
 var round:int = 1
-
+var faded = false
 
 func _ready() -> void:
 	time.size.x = Global.screen.x
@@ -43,6 +43,8 @@ func _ready() -> void:
 	$waterish.play()
 	$FloatingCat.play()
 	$FloatingCat/fade.play("FadeIn")
+	faded = false
+	
 	$End.start()
 	started = true
 
@@ -50,8 +52,9 @@ func _process(delta: float) -> void:
 	if started:
 		if floor($End.time_left) == 25 and not $"ending soon".playing:
 			$"ending soon".play()
-		if floor($End.time_left) == 3 and $FloatingCat.playing:
+		if floor($End.time_left) == 25 and $FloatingCat.playing and !faded:
 			$FloatingCat/fade.play("FadeOut")
+			faded = true
 			
 			
 		if floor($End.time_left / 60) != 0:
@@ -84,4 +87,6 @@ func _on_end_timeout() -> void:
 	finished = true
 	paused = true
 	$Final.play()
+	
+	
 	add_child(Global.endScreen.instantiate())
