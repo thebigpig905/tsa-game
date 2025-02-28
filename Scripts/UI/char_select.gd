@@ -6,6 +6,7 @@ var isin: bool = false #for adding a player
 var editing: bool = false #for renaming i think
 var colornum:int #number that controlswhat color it is
 var plr:int #what player the card goes with
+var pfpnum = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,12 +29,15 @@ func updateVis():
 		$MarginContainer/CenterContainer/VBoxContainer/Spacer.visible = true #the spacer adds a space
 		$Remove.visible = true #the remove player button
 		$Rename.visible = true #the rename player button
+		$PFP.visible = true
+		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.texture = Global.pfps[Global.playerps[plr]]
 	else:
 		$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.visible = false #everyhting should be not visible
 		$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer.visible = false
 		$MarginContainer/CenterContainer/VBoxContainer/Spacer.visible = false
 		$Remove.visible = false
 		$Rename.visible = false
+		$PFP.visible = false
 
 func _on_mouse_entered() -> void:
 	isin = true
@@ -75,3 +79,11 @@ func _on_right_arr_clicked() -> void:
 	Global.col[plr] = colornum
 	$MarginContainer/CenterContainer/VBoxContainer/B/HBoxContainer/PlayerCol.color = Global.colors[Global.col[plr]]
 	print(Global.col)
+
+
+func _on_pfp_clicked() -> void:
+	pfpnum += 1
+	if pfpnum >= Global.pfps.size():
+		pfpnum = 0
+	$MarginContainer/CenterContainer/VBoxContainer/P/PlayerIcon.texture = Global.pfps[pfpnum]
+	Global.playerps[plr] = pfpnum

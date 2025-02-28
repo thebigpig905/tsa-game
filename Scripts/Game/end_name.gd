@@ -7,6 +7,7 @@ var type = "scores"
 func _ready() -> void:
 	$HBoxContainer/background/PlayerName.text = Global.playerNames[plr]
 	$HBoxContainer/background.self_modulate = Global.colors[Global.col[plr]]
+	$HBoxContainer/MarginContainer/PlayerIcon.texture = Global.pfps[Global.playerps[plr]]
 	if type == "scores":
 		$HBoxContainer/ScoreBG/HBoxContainer/MarginContainer/Score.text = "Score: " + str(Global.scores[plr])
 	if type == "total":

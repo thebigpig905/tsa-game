@@ -130,6 +130,7 @@ func _on_close(node): #removes player from selection screen
 		for i in $ButtonHolder/C/HButtonHolder.get_child_count(): #runs through other player selections to match it
 			if $ButtonHolder/C/HButtonHolder.get_child(i) == node:
 				Global.playerNames.remove_at(i) #if it is matched remove the playername in that position from global var
+				Global.playerps.remove_at(i)
 				Global.col.remove_at(i) #same with selected color
 		for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
 			$ButtonHolder/C/HButtonHolder.remove_child(i)
@@ -140,6 +141,7 @@ func _on_add(): #add player when told to
 	Global.players += 1 #add player to global var
 	Global.col.append(Global.players - 1) #adds a default color for the player select
 	Global.playerNames.append("Player " + str($ButtonHolder/C/HButtonHolder.get_child_count())) #generates name
+	Global.playerps.append(0)
 	for i in $ButtonHolder/C/HButtonHolder.get_children(): #removes all player select buttons to be reloaded
 		$ButtonHolder/C/HButtonHolder.remove_child(i)
 		i.queue_free()

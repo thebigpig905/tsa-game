@@ -41,6 +41,9 @@ var settingsDef = {"rounds": 3 , "powerups": true , "lives": 5 , "timer": 90 , "
 #game window size
 var screen:Vector2 = DisplayServer.window_get_size()
 
+#pfp stuff
+var pfps = [preload("res://Assets/Textures/player icon background0.png") , preload("res://Assets/Textures/scuba sam0.png") , preload("res://Assets/Textures/patrick0.png") , preload("res://Assets/Textures/arg0.png")]
+var playerps = [0 , 0]
 #preload textures
 const BLUE_FISH = preload("res://Assets/Textures/new fish0.png")
 const GREEN_FISH = preload("res://Assets/Textures/fish green0.png")
