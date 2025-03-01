@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyaguoau4ktrg"
-path="res://.godot/imported/PAGEDOWN.png-64484cac07d20862c738ff311b145ef2.ctex"
+uid="uid://c6u5rufcifopj"
+path="res://.godot/imported/PageDown.png-27dbe39d73a6dbe30ff4a73d2a01af6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/PAGEDOWN.png"
-dest_files=["res://.godot/imported/PAGEDOWN.png-64484cac07d20862c738ff311b145ef2.ctex"]
+source_file="res://Assets/KEYS/PageDown.png"
+dest_files=["res://.godot/imported/PageDown.png-27dbe39d73a6dbe30ff4a73d2a01af6d.ctex"]
 
 [params]
 

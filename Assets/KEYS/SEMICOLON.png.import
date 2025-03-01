@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i2ol6ssk511q"
-path="res://.godot/imported/SEMICOLON.png-0f3ec1f258d98acfec6ecd063fdc976a.ctex"
+uid="uid://bgc3pjdpd1s60"
+path="res://.godot/imported/Semicolon.png-d95b71fd09b3898ab6664a3207511a6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/SEMICOLON.png"
-dest_files=["res://.godot/imported/SEMICOLON.png-0f3ec1f258d98acfec6ecd063fdc976a.ctex"]
+source_file="res://Assets/KEYS/Semicolon.png"
+dest_files=["res://.godot/imported/Semicolon.png-d95b71fd09b3898ab6664a3207511a6e.ctex"]
 
 [params]
 

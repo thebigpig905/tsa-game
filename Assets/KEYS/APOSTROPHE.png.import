@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2iwd47q1dyh0"
-path="res://.godot/imported/APOSTROPHE.png-62143644bf57fcbeb54f1ecedbf64ee3.ctex"
+uid="uid://dc1k6jmogjb1e"
+path="res://.godot/imported/Apostrophe.png-1ee4238d1ddc8977ce35d64213b348df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/APOSTROPHE.png"
-dest_files=["res://.godot/imported/APOSTROPHE.png-62143644bf57fcbeb54f1ecedbf64ee3.ctex"]
+source_file="res://Assets/KEYS/Apostrophe.png"
+dest_files=["res://.godot/imported/Apostrophe.png-1ee4238d1ddc8977ce35d64213b348df.ctex"]
 
 [params]
 

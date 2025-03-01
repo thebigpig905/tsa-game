@@ -1,6 +1,7 @@
 extends Control
 signal caught(tex)
 signal cleared
+signal die(lvl)
 var loaded: int
 var lvlsize: Vector2
 var playing = false
@@ -381,16 +382,19 @@ func _on_player_damaged() -> void:
 	elif hp <= 0:
 		$Dead.play()
 		player.dir = Vector2(1 , 1)
-		fish_left = 0
+		player.held = 0
 		Global.scores[loaded] -= abs(Global.scores[loaded] / 2)
 		if Global.scores[loaded] % 10 != 0:
 			Global.scores[loaded] -= 25
 		player.position.x = size.x / 2
-		player.position.y = 10
+		player.position.y = 20
 		hp = Global.settings["lives"]
+		fish_left = 0
 		create_fishes(true)
 		if Global.players < 3:
 			create_fishes(false)
+		die.emit(loaded)
+		print(level , " " , loaded)
 
 
 func _on_frenzy_timer_timeout() -> void:

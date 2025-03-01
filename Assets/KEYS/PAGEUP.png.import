@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2syslk5tr3fi"
-path="res://.godot/imported/PAGEUP.png-3bcbb2b1affcf5b0e95003a208416eff.ctex"
+uid="uid://d0y0poqt4ooxj"
+path="res://.godot/imported/PageUp.png-cfa65af6aaa4a5b1d744afb7ee89e304.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/PAGEUP.png"
-dest_files=["res://.godot/imported/PAGEUP.png-3bcbb2b1affcf5b0e95003a208416eff.ctex"]
+source_file="res://Assets/KEYS/PageUp.png"
+dest_files=["res://.godot/imported/PageUp.png-cfa65af6aaa4a5b1d744afb7ee89e304.ctex"]
 
 [params]
 

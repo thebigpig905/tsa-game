@@ -20,6 +20,7 @@ func _ready() -> void:
 		level.loaded = i
 		level.position.x = lvlSize.x * i
 		level.size = lvlSize
+		level.connect("die" , Callable(self , "_on_die"))
 		levels.append(level)
 		add_child(level)
 		Global.scores.append(0)
@@ -90,3 +91,6 @@ func _on_end_timeout() -> void:
 	
 	
 	add_child(Global.endScreen.instantiate())
+
+func _on_die(lvl):
+	print("die")

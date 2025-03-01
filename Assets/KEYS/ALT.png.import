@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwb8288veohsw"
-path="res://.godot/imported/ALT.png-047127d100a6340c4c8408d5bc8931df.ctex"
+uid="uid://ble7eiusdhfoo"
+path="res://.godot/imported/Alt.png-34d637980f6656a03a769d7f3b38dedc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/ALT.png"
-dest_files=["res://.godot/imported/ALT.png-047127d100a6340c4c8408d5bc8931df.ctex"]
+source_file="res://Assets/KEYS/Alt.png"
+dest_files=["res://.godot/imported/Alt.png-34d637980f6656a03a769d7f3b38dedc.ctex"]
 
 [params]
 

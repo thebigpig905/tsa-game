@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://opyd5nm0o8g4"
-path="res://.godot/imported/COMMA.png-f3ecba073f5aed8b0e4f39c161dbf7f4.ctex"
+uid="uid://coi1egscp4l6o"
+path="res://.godot/imported/Comma.png-46919e131fb75a76008fe73407882d13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/COMMA.png"
-dest_files=["res://.godot/imported/COMMA.png-f3ecba073f5aed8b0e4f39c161dbf7f4.ctex"]
+source_file="res://Assets/KEYS/Comma.png"
+dest_files=["res://.godot/imported/Comma.png-46919e131fb75a76008fe73407882d13.ctex"]
 
 [params]
 

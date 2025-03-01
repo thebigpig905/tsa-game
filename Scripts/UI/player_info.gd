@@ -35,6 +35,7 @@ func _ready() -> void:
 		fishes.append(blank)
 	get_parent().get_parent().get_parent().levels[plr].connect("caught" , Callable(self , "_on_catch"))
 	get_parent().get_parent().get_parent().levels[plr].connect("cleared" , Callable(self , "_on_clear"))
+	get_parent().get_parent().get_parent().levels[plr].connect("die" , Callable(self , "_on_die"))
 	update()
 	
 
@@ -68,4 +69,7 @@ func _on_clear():
 	fishes.clear()
 	for i in Global.settings["weight"]:
 		fishes.append(blank)
+	update()
+func _on_die(lcl):
+	_on_clear()
 	update()

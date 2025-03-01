@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bag8ajupnpmnj"
-path="res://.godot/imported/BACKSLASH.png-afbddc60ded744837c3711e852f96629.ctex"
+uid="uid://bhv1mw065yfpj"
+path="res://.godot/imported/BackSlash.png-e508b7e12b673292ff6b0fc34be797c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/BACKSLASH.png"
-dest_files=["res://.godot/imported/BACKSLASH.png-afbddc60ded744837c3711e852f96629.ctex"]
+source_file="res://Assets/KEYS/BackSlash.png"
+dest_files=["res://.godot/imported/BackSlash.png-e508b7e12b673292ff6b0fc34be797c8.ctex"]
 
 [params]
 

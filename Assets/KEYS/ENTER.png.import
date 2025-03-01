@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv3ydfn4hwty2"
-path="res://.godot/imported/ENTER.png-b32efb14ff0a1bde472d3fd2d8dde346.ctex"
+uid="uid://dr3anvu1ui08"
+path="res://.godot/imported/Enter.png-0c4fd8abc1b349ee551937d70a2fb48e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/ENTER.png"
-dest_files=["res://.godot/imported/ENTER.png-b32efb14ff0a1bde472d3fd2d8dde346.ctex"]
+source_file="res://Assets/KEYS/Enter.png"
+dest_files=["res://.godot/imported/Enter.png-0c4fd8abc1b349ee551937d70a2fb48e.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@ signal inputs
 #what menu to load
 var type: String
 #buttons that go with each menu type
-var buttons = {"main" : ["Play" , "Settings" , "Credits" , "Exit Game"] , 
+var buttons = {"main" : ["Play" , "Settings" , "Credits"] , 
 "inGame": ["Start" , "Settings" , "Back"] , 
 "controls": ["Player 1" , "Player 2" , "Player 3" , "Player 4" , "Back"] , 
 "playing":["Resume" , "Controls" , "Quit"] , 

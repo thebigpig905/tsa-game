@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0v56kf7go2c4"
-path="res://.godot/imported/SCROLLLOCK.png-d4c28c33058b39601fd43ed244aa1dc1.ctex"
+uid="uid://do31kdimmr4em"
+path="res://.godot/imported/ScrollLock.png-90cd8c974775aff7d32d3b43bac695e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KEYS/SCROLLLOCK.png"
-dest_files=["res://.godot/imported/SCROLLLOCK.png-d4c28c33058b39601fd43ed244aa1dc1.ctex"]
+source_file="res://Assets/KEYS/ScrollLock.png"
+dest_files=["res://.godot/imported/ScrollLock.png-90cd8c974775aff7d32d3b43bac695e7.ctex"]
 
 [params]
 
