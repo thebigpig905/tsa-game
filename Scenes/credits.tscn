@@ -12,16 +12,34 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Art by Dominick Colangelo
+text = "Coding by Gavin Sullivan
 
-Coding by Gavin Sullivan
+Sound Design by Carter Sullivan
 
-Sound by Carter Sullivan
+Art by Dominick Colangelo
 
 -----
 Game made with Godot Game Engine
 -----
+keyboard buttons by greenpixels on itch.io
+-----
 
+All Sounds found on Pixabay.com
+and are labled free for use by their authors
+
+-----
+In game music is \"Floating Cat\"
+by Michael Grubb
+
+https://uppbeat.io/track/michael-grubb/floating-cat
+-----
+
+-----
+Menu music is \"8bit Canon\"
+by Giulio Fazio
+
+https://uppbeat.io/track/giulio-fazio/8bit-canon
+-----
 This game was made for 
 Technology Student Association
  video game design competition

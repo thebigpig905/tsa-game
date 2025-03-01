@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bdhr0jkcfalc3"]
+[gd_scene load_steps=34 format=3 uid="uid://bdhr0jkcfalc3"]
 
 [ext_resource type="Script" path="res://Scripts/Game/level.gd" id="1_ngj87"]
 [ext_resource type="PackedScene" uid="uid://vl27g7nuolo1" path="res://Scenes/player.tscn" id="2_6ku75"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c6q8fk0qrjise" path="res://Assets/Textures/gradient.png" id="3_fkl27"]
 [ext_resource type="Texture2D" uid="uid://c5opcqbticla7" path="res://Assets/Textures/shield0.png" id="4_uqv5y"]
 [ext_resource type="AudioStream" uid="uid://q8brkhn8w26" path="res://Assets/Sounds/For Testing/error-sound-39539.mp3" id="6_f2lrv"]
+[ext_resource type="Texture2D" uid="uid://cj4ieo1e2ysdd" path="res://Assets/KEYS/2.png" id="6_u4xwf"]
 [ext_resource type="AudioStream" uid="uid://kgmqueeg1b0u" path="res://Assets/Sounds/For Testing/ding-36029.mp3" id="7_3kqn6"]
+[ext_resource type="Texture2D" uid="uid://v7n5g54rqfm0" path="res://Assets/KEYS/1.png" id="7_40sh4"]
 [ext_resource type="AudioStream" uid="uid://dbfyw70goo5yj" path="res://Assets/Sounds/For Testing/pop-1-35897.mp3" id="8_how5q"]
 [ext_resource type="AudioStream" uid="uid://dt7lfi52j3ssx" path="res://Assets/Sounds/For Testing/wrong-47985.mp3" id="9_srqqb"]
 [ext_resource type="AudioStream" uid="uid://xaoyas1pw8ka" path="res://Assets/Sounds/For Testing/cash-register-purchase-87313.mp3" id="10_nasyh"]
@@ -372,6 +374,42 @@ libraries = {
 
 [node name="Click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_dvcbl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 298.0
+offset_right = 395.0
+offset_bottom = 338.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="re" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "reel in:"
+
+[node name="reel" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+texture = ExtResource("6_u4xwf")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="sw" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "switch directions:"
+
+[node name="switch" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+texture = ExtResource("7_40sh4")
+expand_mode = 2
+stretch_mode = 4
 
 [connection signal="damaged" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_damaged"]
 [connection signal="power" from="SubViewportContainer/SubViewport/Player" to="." method="_on_player_power"]

@@ -98,6 +98,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				block = true
 				await inputs
 				Global.use[pc] = new
+				print("'" + new + "':" + " preload('res://Assets/KEYS/" + new + ".png') , ")
 				block = false
 				updateButtons()
 			"Reset Controls":
@@ -122,7 +123,7 @@ func _on_btn_clicked(btn): #btn in type of button that was pressed
 				queue_free()
 			_:
 				print("could not find button: " , btn) #if button pressed does not appear in the above list, add it
-		print(prev)
+		#print(prev)
 			
 func _on_close(node): #removes player from selection screen
 	if Global.players > 1:
@@ -164,7 +165,7 @@ func updateButtons():
 		
 		$ButtonHolder.add_child(menu)
 	if type == "main":
-		print(size.x)
+		#print(size.x)
 		var title = Global.title.instantiate()
 		title.add_theme_constant_override("margin_left" , 100)
 		$ButtonHolder.add_child(title)

@@ -65,6 +65,10 @@ func _ready() -> void:
 	bottom.position.x = lvlsize.x / 2
 	bottom.position.y = background.size.y + 5
 	
+	$VBoxContainer.position.y = lvlsize.y - 70
+	$VBoxContainer.position.x = 25
+	$VBoxContainer/HBoxContainer2/reel.texture = Global.keys[Global.use[loaded]]
+	$VBoxContainer/HBoxContainer/switch.texture = Global.keys[Global.switch[loaded]]
 	#set the fishing line
 	line.points[0] = Vector2(lvlsize.x / 2 , -500)
 	#generate the fishes
@@ -90,9 +94,11 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	
+	$VBoxContainer/HBoxContainer2/reel.texture = Global.keys[Global.use[loaded]]
+	$VBoxContainer/HBoxContainer/switch.texture = Global.keys[Global.switch[loaded]]
+	$VBoxContainer/HBoxContainer2/re.visible = player.held > 0
+	$VBoxContainer/HBoxContainer2/reel.visible = player.held > 0
 		
-
 	line.points[1] = player.position - Vector2(2 , 14)
 	$sheild.visible = sheilded #if shield is active, show the icon
 	#pause fish and player on game pause
