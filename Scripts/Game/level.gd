@@ -38,7 +38,8 @@ var hp:int #player health
 
 #runs on scene load
 func _ready() -> void:
-	
+	$sheild.position.x = size.x - 74
+	$sheild.position.y = Global.screen.y - 86
 	player.plr = loaded #sets the players player number to the load order :if this level was loaded first, that is player 1
 	hp = Global.settings["lives"] #sets player hp to the global setting
 	background.color = Color.TEAL #background color

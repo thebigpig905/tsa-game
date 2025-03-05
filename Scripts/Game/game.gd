@@ -11,6 +11,8 @@ var faded = false
 func _ready() -> void:
 	time.size.x = Global.screen.x
 	time.position.y = 20
+	$TextureRect.position.y = 6
+	$TextureRect.position.x = Global.screen.x / 2 - $TextureRect.size.x / 2
 	Global.scores = []
 	lvlSize = Global.screen / Vector2(Global.players , 1)
 	lvlSize.y *= 0.85

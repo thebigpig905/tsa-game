@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://clmg8ootjcd8v"]
+[gd_scene load_steps=14 format=3 uid="uid://clmg8ootjcd8v"]
 
 [ext_resource type="Script" path="res://Scripts/Game/game.gd" id="1_akv7e"]
 [ext_resource type="AudioStream" uid="uid://cknh682yx4u42" path="res://Assets/Sounds/For Testing/cinematic-music-sketches-11-cinematic-percussion-sketch-116186.mp3" id="2_ehavk"]
+[ext_resource type="Texture2D" uid="uid://dgq7pyykvudm1" path="res://Assets/Textures/timerborder.png" id="2_pm3o4"]
 [ext_resource type="AudioStream" uid="uid://dbfyw70goo5yj" path="res://Assets/Sounds/For Testing/pop-1-35897.mp3" id="3_hbdwl"]
 [ext_resource type="AudioStream" uid="uid://dw413yficjity" path="res://Assets/Sounds/For Testing/spin-complete-295086.mp3" id="4_d66lr"]
 [ext_resource type="AudioStream" uid="uid://fq8x07vsufl1" path="res://Assets/Sounds/For Testing/daneben-105534.mp3" id="5_7wj6i"]
@@ -74,6 +75,19 @@ one_shot = true
 
 [node name="End" type="Timer" parent="."]
 one_shot = true
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = -5.0
+offset_top = -14.0
+offset_right = 148.0
+offset_bottom = 46.0
+texture = ExtResource("2_pm3o4")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="Time" type="Label" parent="."]
 z_index = 2
